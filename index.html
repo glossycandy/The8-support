@@ -231,6 +231,66 @@
             font-size: 13px;
             margin: 12px 0;
         }
+/* 左下角搜索悬浮按钮 */
+.float-search-btn {
+    position: fixed;
+    bottom: 24px;
+    left: 20px;
+    background: #2e7d5e;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    cursor: pointer;
+    z-index: 1000;
+    border: 2px solid #ffdf9c;
+}
+/* 搜索面板（默认隐藏） */
+.search-panel {
+    position: fixed;
+    bottom: 100px;
+    left: 20px;
+    right: 20px;
+    background: white;
+    border-radius: 32px;
+    padding: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    z-index: 1100;
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+    border: 1px solid #c8e0d0;
+    max-width: 400px;  /* 大屏幕下不会太宽 */
+}
+.search-panel.open {
+    display: flex;
+}
+.search-panel input {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 40px;
+    border: 1px solid #b8d9c4;
+    font-size: 16px;
+    outline: none;
+    background: #fefef7;
+}
+.search-panel .close-search {
+    background: #eef3ea;
+    border: none;
+    padding: 10px;
+    border-radius: 40px;
+    cursor: pointer;
+    color: #1e5e3f;
+    font-weight: 500;
+}
+.search-status {
+    font-size: 13px;
+    color: #7e9d8c;
+    padding: 0 8px;
+}
     </style>
 </head>
 <body>
@@ -248,7 +308,14 @@
         <!-- 科普了解（保留） -->
         <div class="item-block">
             <div class="item-name">🔍 科普了解</div>
-            <div class="desc">为什么需要打榜？音源/投票是什么？回归期怎么做最有效？</div>
+            <div class="desc">为什么需要打榜？音源/投票是什么？回归期怎么做最有效？
+            <p>1.先准备科学上网工具(因为使用感都不一样不做具体推荐，给几个名字大家用过的：樱花猫、矿泉水、快连、快喵、yuko等，还有一些免费的xhs搜一搜)</p>
+            <p>2.将所需软件下载好：
+            <p>国内各听歌软件QQ音乐❗、酷狗酷我；
+            <p>国外音源(melon❗、Spotify)+打歌投票(idolchamp、mubeat、mnetplus、higher实时、linc/tin事前)</p>
+            <p>3.正式回归前先将在听歌和打歌软件攒票(下面有下载注册攒票教程)</p>
+
+</div>
             <div class="link-list">
                 <a href="https://weibo.com/8008561108/5303955094505470" class="link-btn">📖 微博科普</a>
             </div>
@@ -281,7 +348,7 @@
             <div class="item-name">🍎 软件下载 · 苹果用户</div>
             <div class="desc">借国外Apple ID登录App Store下载（可借用可购买临时账号等）</div>
             <div class="link-list">
-                <a href="#" class="link-btn">xhs搜搜办法吧！</a>
+                <a href="https://weibo.com/3861028956/5103091512251376" class="link-btn">不借用id(仅供参考)</a>
             </div>
         </div>
     </div>
@@ -343,7 +410,7 @@
         <div class="section-title"><span>🚀</span> 回归阶段</div>
         
    <div class="tip">
-                💡 回归期三步：专辑购买、音源播放、打歌投票；具体安排事项到时数数会出时间安排表，跟着走就行<br>
+                💡 回归期三步：专辑购买、音源播放、打歌投票；具体安排事项到时数数会出时间安排表，先熟悉操作，跟着走就行<br>
                 <a href="#" style="color:#2e7d5e;"></a>
             </div>
 
@@ -356,9 +423,9 @@
                 <a href="https://weibo.com/7503303629/5060563742754752" class="link-btn">⭐ 数数官方教程</a>
                 <a href="#" class="link-btn">🐸 粉丝分享教程</a>
                 <p>
-                <a href="https://weibo.com/7503303629/5060491161896099" class="link-btn">新歌必做</a>
-                <a href="https://weibo.com/7503303629/5060384421579068" class="link-btn">由你榜积分</a>
-                <a href="https://weibo.com/7503303629/5060512454808731" class="link-btn">播放三清</a>
+                <a href="https://weibo.com/7503303629/5060491161896099" class="link-btn">1.新歌必做</a>
+                <a href="https://weibo.com/7503303629/5060384421579068" class="link-btn">2.由你榜积分</a>
+                <a href="https://weibo.com/7503303629/5060512454808731" class="link-btn">3.播放三清</a>
             </div>
         </div>
 
@@ -366,11 +433,37 @@
         <div class="sub-title">🌍 国外音源 & 打歌投票</div>
         <div class="item-block">
             <div class="item-name">🍈 Melon</div>
-            <div class="desc">下载、套餐购买、登入登出、基础设置、缓存、歌单等</div>
+            <div class="desc">下载、套餐购买、登入登出、基础设置、缓存、歌单等
+                <p>1.下载安装
+                <p>2.完成基础设置(无需注册，数数组织套餐购买后再登录)
+                <p>3.熟悉操作(登录、搜索点赞、歌单、缓存...)
+            </div>
             <div class="link-list">
                 <a href="https://weibo.com/7859023491/5098393749160272" class="link-btn">⭐ 狂想图文教程</a>
                 <a href="https://weibo.com/7503303629/5106122256025873" class="link-btn">⭐ 数数录屏教程</a>
-                <a href="#" class="link-btn">🐸 粉丝分享教程</a>
+            </div>
+            <div class="link-list">
+                <a href="https://pan.baidu.com/s/1xmMC_hmRVw32NBzWhTCEsQ?pwd=8888" class="link-btn">安卓melon安装包</a>
+                <a href="https://weibo.com/3861028956/5103091512251376" class="link-btn">苹果melon下载(参考)</a>
+            </div>
+            <div class="link-list">
+                <a href="https://weibo.com/7742872929/5105346153021864" class="link-btn">粉丝录屏教程1(下载、登录、基础设置、歌单、激活、歌曲下载删除)</a>
+                <a href="https://weibo.com/6839202774/5102998202613977" class="link-btn">粉丝录屏教程2(登录、点赞、基础设置、歌单)</a>
+             </div>
+           <div class="desc">套餐购买后：回归期
+                <p>4.回归前一两天激活套餐
+                <p>5.回归首小时内下载删除歌曲
+                <p>6.每天切瓜：晚11点清缓存+建歌单
+              </div>
+              <div class="link-list">
+                <a href="https://weibo.com/7503303629/5106116302471530" class="link-btn">安卓余额下载</a>
+                <a href="https://weibo.com/7503303629/5106117176723994" class="link-btn">ios礼物盒下载</a>
+                <a href="https://weibo.com/7503303629/5106856662140645" class="link-btn">windows激活下载</a>
+                <p>
+                <a href="https://weibo.com/7798536579/5106915359329483" class="link-btn">每晚11点清除歌单和缓存</a>
+                <p>
+                <a href="https://weibo.com/6839202774/5106549511423568" class="link-btn">melon定时和防断</a>
+                <a href="https://weibo.com/7710312293/5106915579265996" class="link-btn">melon切瓜次数</a>
             </div>
         </div>
         <div class="item-block">
@@ -443,11 +536,21 @@
 </div>
 
 <!-- 悬浮目录按钮 -->
+<!-- 左下角搜索悬浮按钮 -->
+<div class="float-search-btn" id="floatSearchBtn">
+    <span>🔍</span>
+</div>
+<!-- 搜索面板 -->
+<div class="search-panel" id="searchPanel">
+    <input type="text" id="searchInput" placeholder="输入关键词 例如：Melon 下载">
+    <div class="search-status" id="searchStatus">✨ 输入关键词后自动过滤教程卡片</div>
+    <button class="close-search" id="closeSearchBtn">关闭</button>
+</div>
 <div class="float-dir-btn" id="floatDirBtn">
     <span>📑</span>
 </div>
 
-<!-- 全屏目录浮层 -->
+<!-- 右下角全屏目录浮层 -->
 <div class="dir-overlay" id="dirOverlay">
     <div class="dir-panel">
         <h3>📚 快速跳转 <span>🐸✨</span></h3>
@@ -476,19 +579,114 @@
 <div class="infinity">∞</div>
 
 <script>
-    const floatBtn = document.getElementById('floatDirBtn');
-    const overlayDir = document.getElementById('dirOverlay');
-    const closeBtn = document.getElementById('closeDirBtn');
+    document.addEventListener('DOMContentLoaded', function() {
+        // 获取元素
+        const searchBtn = document.querySelector('.float-search-btn');
+        const searchPanel = document.getElementById('searchPanel');
+        const searchInput = document.getElementById('searchInput');
+        const searchStatus = document.getElementById('searchStatus');
+        const closeSearchBtn = document.getElementById('closeSearchBtn');
+        const allItems = document.querySelectorAll('.item-block');
 
-    function openDir() { overlayDir.classList.add('open'); }
-    function closeDir() { overlayDir.classList.remove('open'); }
+        // 如果找不到必要元素，退出
+        if (!searchBtn || !searchPanel || !searchInput) {
+            console.error('搜索元素未找到');
+            return;
+        }
 
-    floatBtn.addEventListener('click', openDir);
-    closeBtn.addEventListener('click', closeDir);
-    overlayDir.addEventListener('click', function(e) {
-        if (e.target === overlayDir) closeDir();
+        // 打开面板
+        function openPanel() {
+            searchPanel.classList.add('open');
+            searchInput.focus();
+        }
+        // 关闭面板并清空搜索
+        function closePanel() {
+            searchPanel.classList.remove('open');
+            searchInput.value = '';
+            filterItems(); // 重置所有卡片显示
+        }
+        // 过滤卡片（支持空格分隔的多关键词 AND 匹配）
+        function filterItems() {
+            const raw = searchInput.value.trim();
+            if (raw === '') {
+                allItems.forEach(item => item.style.display = '');
+                if (searchStatus) searchStatus.innerText = '✨ 显示全部教程卡片';
+                return;
+            }
+            const keywords = raw.split(/\s+/).filter(k => k.length > 0);
+            let matchCount = 0;
+            allItems.forEach(item => {
+                const text = item.innerText.toLowerCase();
+                const allMatch = keywords.every(kw => text.includes(kw.toLowerCase()));
+                if (allMatch) {
+                    item.style.display = '';
+                    matchCount++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            if (searchStatus) {
+                searchStatus.innerText = `🔍 找到 ${matchCount} 个匹配的卡片（关键词：${keywords.join(' + ')}）`;
+            }
+        }
+
+        // 按钮点击：切换面板（阻止冒泡）
+        searchBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (searchPanel.classList.contains('open')) {
+                closePanel();
+            } else {
+                openPanel();
+            }
+        });
+
+        // 关闭按钮
+        if (closeSearchBtn) {
+            closeSearchBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                closePanel();
+            });
+        }
+
+        // 输入时实时过滤
+        searchInput.addEventListener('input', filterItems);
+
+        // 点击页面其他地方关闭面板（但不关闭按钮本身触发的冒泡已阻止）
+        document.addEventListener('click', function(e) {
+            if (searchPanel.classList.contains('open')) {
+                // 如果点击的目标不是面板内部且不是搜索按钮，则关闭
+                if (!searchPanel.contains(e.target) && e.target !== searchBtn) {
+                    closePanel();
+                }
+            }
+        });
     });
+    // ========== 右下角目录悬浮按钮控制 ==========
+    const floatDirBtn = document.getElementById('floatDirBtn');
+    const dirOverlay = document.getElementById('dirOverlay');
+    const closeDirBtn = document.getElementById('closeDirBtn');
 
+    if (floatDirBtn && dirOverlay) {
+        // 打开目录浮层
+        floatDirBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            dirOverlay.classList.add('open');
+        });
+        // 关闭目录浮层（按钮和背景点击）
+        function closeDirOverlay() {
+            dirOverlay.classList.remove('open');
+        }
+        if (closeDirBtn) {
+            closeDirBtn.addEventListener('click', closeDirOverlay);
+        }
+        dirOverlay.addEventListener('click', function(e) {
+            if (e.target === dirOverlay) {
+                closeDirOverlay();
+            }
+        });
+    }
+
+    // 目录链接点击后平滑滚动并关闭浮层
     const dirLinks = document.querySelectorAll('.dir-link');
     dirLinks.forEach(link => {
         link.addEventListener('click', function(e) {
@@ -496,8 +694,8 @@
             const targetId = this.getAttribute('href');
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
-                closeDir();
-                const yOffset = -80;
+                closeDirOverlay(); // 关闭浮层
+                const yOffset = -80; // 调整滚动偏移，防止被顶部遮挡
                 const y = targetElement.getBoundingClientRect().top + window.pageYOffset + yOffset;
                 window.scrollTo({ top: y, behavior: 'smooth' });
             }
