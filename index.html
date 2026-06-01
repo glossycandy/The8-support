@@ -2,8 +2,8 @@
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>音源打歌全流程教程</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>徐明浩小分队 · 回归打榜合集</title>
     <style>
         * {
             margin: 0;
@@ -11,319 +11,496 @@
             box-sizing: border-box;
         }
         body {
+            background: #eef7e6;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background: #f8f9fc;
-            padding: 20px 16px 40px;
-            color: #1e293b;
+            color: #1e3a2f;
+            padding: 0 0 80px 0;
         }
-        .header {
+        .hero {
+            background: linear-gradient(135deg, #2e7d5e, #1b5e3f);
+            padding: 32px 20px;
             text-align: center;
+            border-radius: 0 0 40px 40px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
             margin-bottom: 20px;
         }
-        .header h1 {
+        .hero h1 {
             font-size: 28px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #4f46e5, #7c3aed);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 8px;
+            font-weight: 800;
+            color: #fff9c4;
+            text-shadow: 2px 2px 0 #1a4d38;
+            letter-spacing: 2px;
         }
-        .header p {
-            color: #475569;
+        .hero p {
             font-size: 16px;
-        }
-        /* 导航目录样式 */
-        .nav-menu {
+            color: #e0f2e9;
+            margin-top: 8px;
             display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
+            align-items: center;
             justify-content: center;
-            margin: 20px 0 25px;
-            padding: 8px 0;
+            gap: 12px;
         }
-        .nav-btn {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            color: #334155;
-            padding: 8px 16px;
-            border-radius: 40px;
-            font-size: 14px;
-            font-weight: 500;
-            text-decoration: none;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-            transition: all 0.2s;
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 16px;
         }
-        .nav-btn:hover {
-            background: #4f46e5;
-            color: white;
-            border-color: #4f46e5;
+        .section-card {
+            background: white;
+            border-radius: 28px;
+            margin-bottom: 24px;
+            padding: 20px;
+            box-shadow: 0 6px 14px rgba(46,125,94,0.12);
+            border: 1px solid #c8e0d0;
         }
         .section-title {
-            font-size: 20px;
-            font-weight: 600;
-            margin: 30px 0 16px 0;
-            padding-left: 12px;
-            border-left: 5px solid #4f46e5;
-            color: #0f172a;
-            scroll-margin-top: 15px; /* 让锚点滚动时不被顶部遮挡 */
+            font-size: 22px;
+            font-weight: 700;
+            color: #1e5e3f;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+            border-left: 6px solid #7ebc8d;
+            padding-left: 14px;
         }
-        .card {
-            background: white;
-            border-radius: 24px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.02);
-            border: 1px solid #e9eef2;
-            scroll-margin-top: 15px;
-        }
-        .card-title {
+        .sub-title {
             font-size: 18px;
             font-weight: 600;
-            margin-bottom: 12px;
+            color: #2e7d5e;
+            margin: 20px 0 12px 0;
+            background: #e2f0e2;
+            display: inline-block;
+            padding: 4px 16px;
+            border-radius: 40px;
+        }
+        .item-block {
+            background: #fafff7;
+            border-radius: 20px;
+            padding: 16px;
+            margin-bottom: 16px;
+            border-left: 4px solid #7ebc8d;
+        }
+        .item-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 6px;
             display: flex;
             align-items: center;
             gap: 8px;
-            color: #0f172a;
         }
-        .badge {
-            background: #e0e7ff;
-            color: #4f46e5;
-            padding: 4px 12px;
-            border-radius: 30px;
+        .desc {
             font-size: 14px;
-            font-weight: 500;
-            margin-left: 8px;
+            color: #4a6b5c;
+            margin-bottom: 12px;
+            line-height: 1.4;
         }
-        .list-item {
-            padding: 8px 0 8px 24px;
-            position: relative;
-            line-height: 1.6;
-            color: #334155;
-            border-bottom: 1px dashed #f1f5f9;
+        .link-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 8px;
         }
-        .list-item:last-child {
-            border-bottom: none;
-        }
-        .list-item::before {
-            content: "•";
-            color: #4f46e5;
-            font-weight: bold;
-            position: absolute;
-            left: 8px;
-        }
-        .btn {
-            display: block;
-            background: #4f46e5;
-            color: white;
-            padding: 14px 20px;
+        .link-btn {
+            background: #eef3ea;
+            padding: 6px 16px;
             border-radius: 40px;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 16px;
-            text-align: center;
-            margin: 16px 0 8px;
-            box-shadow: 0 6px 14px rgba(79,70,229,0.25);
-            transition: background 0.2s;
-            border: none;
-        }
-        .btn.secondary {
-            background: #f1f4f9;
-            color: #1e293b;
-            box-shadow: none;
-        }
-        .btn.small {
-            padding: 10px 16px;
             font-size: 14px;
-            display: inline-block;
-            width: auto;
-            margin: 8px 8px 0 0;
+            color: #1e5e3f;
+            text-decoration: none;
+            border: 1px solid #b8d9c4;
+            transition: 0.2s;
         }
-        .link-text {
-            color: #4f46e5;
-            text-decoration: underline;
-            word-break: break-all;
+        .link-btn:hover {
+            background: #2e7d5e;
+            color: white;
+            border-color: #2e7d5e;
+        }
+        .float-dir-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 20px;
+            background: #2e7d5e;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+            cursor: pointer;
+            z-index: 1000;
+            border: 2px solid #ffdf9c;
+        }
+        .dir-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(30, 58, 47, 0.92);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.25s ease;
+        }
+        .dir-overlay.open {
+            visibility: visible;
+            opacity: 1;
+        }
+        .dir-panel {
+            background: white;
+            width: 85%;
+            max-width: 340px;
+            border-radius: 48px;
+            padding: 28px 20px;
+            max-height: 80vh;
+            overflow-y: auto;
+            text-align: center;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.3);
+            border: 2px solid #ffdf9c;
+        }
+        .dir-panel h3 {
+            font-size: 24px;
+            color: #1e5e3f;
+            margin-bottom: 20px;
+        }
+        .dir-group {
+            margin: 20px 0;
+            text-align: left;
+        }
+        .dir-group-title {
+            font-weight: 700;
+            font-size: 18px;
+            color: #2e7d5e;
+            border-left: 4px solid #7ebc8d;
+            padding-left: 12px;
+            margin-bottom: 12px;
+        }
+        .dir-link {
+            display: block;
+            padding: 10px 0 10px 20px;
+            color: #1e3a2f;
+            text-decoration: none;
+            font-size: 15px;
+            border-bottom: 1px solid #e0f0e0;
+        }
+        .close-dir {
+            margin-top: 20px;
+            background: #b8d9c4;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #1e5e3f;
+            width: 100%;
+        }
+        .deco {
+            position: fixed;
+            bottom: 20px;
+            left: 16px;
+            font-size: 24px;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        .infinity {
+            position: fixed;
+            top: 100px;
+            right: 10px;
+            font-size: 80px;
+            opacity: 0.08;
+            pointer-events: none;
+            transform: rotate(15deg);
+        }
+        footer {
+            text-align: center;
+            font-size: 12px;
+            color: #7e9d8c;
+            margin-top: 30px;
+            padding-bottom: 20px;
         }
         .tip {
             background: #fef9e7;
             border-left: 4px solid #f59e0b;
-            padding: 16px;
+            padding: 12px;
             border-radius: 12px;
-            font-size: 14px;
-            color: #92400e;
-            margin: 16px 0 0;
-        }
-        .image-placeholder {
-            background: #f1f5f9;
-            border-radius: 16px;
-            padding: 24px;
-            text-align: center;
-            color: #64748b;
-            font-size: 14px;
-            border: 2px dashed #cbd5e1;
-            margin: 16px 0;
-        }
-        .footer {
-            text-align: center;
-            margin-top: 40px;
-            color: #94a3b8;
-            font-size: 14px;
-            border-top: 1px solid #e2e8f0;
-            padding-top: 24px;
-        }
-        .flex-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            align-items: center;
-        }
-        hr {
-            border: none;
-            border-top: 1px solid #e9eef2;
-            margin: 24px 0;
+            font-size: 13px;
+            margin: 12px 0;
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>🎵 音源打歌全流程教程</h1>
-        <p>从科普到攒票，一篇搞定！</p>
+
+<div class="hero">
+    <h1>徐明浩小分队即将回归！</h1>
+    <p><span>✨</span> 打榜资源一站汇总 <span>✨</span></p>
+</div>
+
+<div class="container" id="mainContent">
+    <!-- ========= 第一部分：准备工作 ========= -->
+    <div id="prep" class="section-card">
+        <div class="section-title"><span>📋</span> 准备工作</div>
+        
+        <!-- 科普了解（保留） -->
+        <div class="item-block">
+            <div class="item-name">🔍 科普了解</div>
+            <div class="desc">为什么需要打榜？音源/投票是什么？回归期怎么做最有效？</div>
+            <div class="link-list">
+                <a href="#" class="link-btn">📖 微博科普教程</a>
+                <a href="#" class="link-btn">💡 打榜入门指南</a>
+            </div>
+        </div>
+
+        <!-- 软件下载（恢复为详细安卓/苹果分类） -->
+        <div class="item-block">
+            <div class="item-name">📲 软件下载 · 安卓用户</div>
+            <div class="desc">
+                <strong>方法1：</strong>安大师 + 夸克（基本能实现所有软件下载）<br>
+        <div class="tip">
+                💡 在夸克下载以后压缩包后缀改为zip后打开：<br>
+                <a href="#" style="color:#2e7d5e;">https://pan.quark.cn/s/d6043dce0860</a>
+            </div>
+                <strong>方法2：</strong>apkpure（mnetplus需单独找安装包）<br>
+           <div class="link-list">
+                <a href="https://apkpure.net/cn/" class="link-btn">📦 apkpure点此下载</a>
+                 </div>
+                <strong>方法3：</strong>百度搜索“软件名+直接下载”，注意避开捆绑软件<br>
+                <strong>部分手机通用：</strong>下载谷歌商店，在谷歌商店内下载<br>
+                <span style="color:#d9534f;">⚠️ 华为手机无谷歌服务，建议用方法1或2</span>
+            </div>
+            <div class="tip">
+                💡 小红书参考教程：<br>
+                <a href="#" style="color:#2e7d5e;">http://xhslink.com/o/6AlbgyOWuUB</a>
+            </div>
+        </div>
+
+        <div class="item-block">
+            <div class="item-name">🍎 软件下载 · 苹果用户</div>
+            <div class="desc">借国外Apple ID登录App Store下载（可借用可购买临时账号等）</div>
+            <div class="link-list">
+                <a href="#" class="link-btn">xhs搜索尝试</a>
+            </div>
+        </div>
     </div>
 
-    <!-- 新增导航目录 -->
-    <div class="nav-menu">
-        <a href="#yinyuan" class="nav-btn">🎧 音源软件</a>
-        <a href="#android" class="nav-btn">🤖 安卓下载</a>
-        <a href="#ios" class="nav-btn">🍎 苹果下载</a>
-        <a href="#idolchamp" class="nav-btn">📱 idolchamp</a>
-        <a href="#mubeat" class="nav-btn">📱 mubeat</a>
-        <a href="#mnetplus" class="nav-btn">📱 mnetplus</a>
-        <a href="#superstar" class="nav-btn">📱 superstarX</a>
-        <a href="#download" class="nav-btn">📦 安装包</a>
-        <a href="#group" class="nav-btn">👥 粉丝群</a>
+    <!-- ========= 第二部分：攒票阶段 ========= -->
+    <div id="saveTickets" class="section-card">
+        <div class="section-title"><span>🎫</span> 攒票阶段</div>
+        
+        <!-- 国内软件 -->
+        <div class="sub-title">🇨🇳 国内软件</div>
+        <div class="item-block">
+            <div class="item-name">🐧 QQ音乐、酷狗、酷我</div>
+            <div class="desc">由你榜攒积分、多创小号(1手机号可申5个qq号)</div>
+            <div class="link-list">
+                <a href="https://weibo.com/7503303629/5280425008170059" class="link-btn">⭐ 数数官方教程</a>
+                <a href="#" class="link-btn">🐸 粉丝分享教程</a>
+            </div>
+      
+        <!-- 国外攒票软件 -->
+        <div class="sub-title">🌍 国外软件（攒票/投票）</div>
+        <div class="item-block">
+            <div class="item-name">🏆 Idolchamp (冠军秀)</div>
+            <div class="desc">注册、每日攒心、投票流程</div>
+            <div class="link-list">
+                <a href="https://weibo.com/7503303629/5277140859224626" class="link-btn">⭐ 数数官方教程</a>
+                <a href="#" class="link-btn">🐸 粉丝分享教程</a>
+            </div>
+        </div>
+        <div class="item-block">
+            <div class="item-name">📀 Mubeat</div>
+            <div class="desc">看广告攒心、绑定账号</div>
+            <div class="link-list">
+                <a href="https://weibo.com/7503303629/5281932381785509" class="link-btn">⭐ 数数官方教程</a>
+                <a href="#" class="link-btn">🐸 粉丝分享教程</a>
+            </div>
+        </div>
+        <div class="item-block">
+            <div class="item-name">⭐ Linc/tin(事前) | Higher(实时)</div>
+            <div class="desc">游戏攒心、周榜规则</div>
+            <div class="link-list">
+                <a href="https://weibo.com/7503303629/5279410408131136" class="link-btn">⭐ 数数官方教程</a>
+                <a href="#" class="link-btn">🐸 粉丝分享教程</a>
+            </div>
+        </div>
+        <div class="item-block">
+            <div class="item-name">🔴 Mnet Plus</div>
+            <div class="desc">MCD投票、每日任务</div>
+            <div class="link-list">
+                <a href="https://weibo.com/7503303629/5304670084145963" class="link-btn">⭐ 数数官方教程</a>
+                <a href="#" class="link-btn">🐸 粉丝分享教程</a>
+            </div>
+        </div>
     </div>
 
-    <!-- 音源软件科普（已移除小红书链接） -->
-    <div id="yinyuan" class="section-title">📢 主要打歌软件科普</div>
-    <div class="card">
-        <div class="card-title">🎧 音源软件 <span class="badge">必看</span></div>
-        <div class="list-item"><strong>Melon</strong> —— 韩国最大的音源网站，打榜必备，实时反映音源成绩。</div>
-        <div class="list-item"><strong>Spotify</strong> —— 国际流媒体平台，部分榜单计入成绩，需要注册海外区账号。</div>
-        <div class="list-item"><strong>bugs</strong> —— 韩国主流音源网站，实时榜单更新快，也是打歌重要参考。</div>
-        <div class="list-item"><strong>Genie</strong> —— 韩国知名音源平台，提供多样化音乐服务，粉丝需每日刷榜。</div>
-        <!-- 原tip已移除 -->
+    <!-- ========= 第三部分：回归阶段 ========= -->
+    <div id="comeback" class="section-card">
+        <div class="section-title"><span>🚀</span> 回归阶段</div>
+        
+   <div class="tip">
+                💡 回归期三步：专辑购买、音源播放、打歌投票；具体安排事项到时数数会出时间安排表，跟着走就行<br>
+                <a href="#" style="color:#2e7d5e;"></a>
+            </div>
+
+        <!-- 国内音源 -->
+        <div class="sub-title">🇨🇳 国内音源</div>
+        <div class="item-block">
+            <div class="item-name">QQ音乐 · 酷狗 · 酷我</div>
+            <div class="desc">回归期重点：专辑购买、音源播放、榜单推荐（可以重点先学习QQ音乐的新歌必做、由你榜积分、三清教程）</div>
+            <div class="link-list">
+                <a href="https://weibo.com/7503303629/5060563742754752" class="link-btn">⭐ 数数官方教程</a>
+                <a href="#" class="link-btn">🐸 粉丝分享教程</a>
+                <a href="https://weibo.com/7503303629/5060491161896099" class="link-btn">新歌必做</a>
+                <a href="https://weibo.com/7503303629/5060384421579068" class="link-btn">由你榜积分</a>
+                <a href="https://weibo.com/7503303629/5060512454808731" class="link-btn">播放三清</a>
+            </div>
+        </div>
+
+        <!-- 国外音源 + 打歌投票 -->
+        <div class="sub-title">🌍 国外音源 & 打歌投票</div>
+        <div class="item-block">
+            <div class="item-name">🍈 Melon</div>
+            <div class="desc">下载、套餐购买、登入登出、基础设置、缓存、歌单等</div>
+            <div class="link-list">
+                <a href="https://weibo.com/7859023491/5098393749160272" class="link-btn">⭐ 狂想图文教程</a>
+                <a href="https://weibo.com/7503303629/5106122256025873" class="link-btn">⭐ 数数录屏教程</a>
+                <a href="#" class="link-btn">🐸 粉丝分享教程</a>
+            </div>
+        </div>
+        <div class="item-block">
+            <div class="item-name">🟢 Spotify</div>
+            <div class="desc">海外区账号、歌单循环、音量规范</div>
+            <div class="link-list">
+                <a href="https://weibo.com/7859023491/5098756091937201" class="link-btn">⭐ 狂想图文教程</a>
+                <a href="#" class="link-btn">🐸 粉丝分享教程</a>
+            </div>
+        </div>
+        <div class="item-block">
+            <div class="item-name">▶️ Youtube</div>
+            <div class="desc">注册、刷管</div>
+            <div class="link-list">
+                <a href="https://weibo.com/7859023491/5099118586495932" class="link-btn">⭐ 狂想图文教程</a>
+                <a href="#" class="link-btn">🐸 粉丝分享教程</a>
+            </div>
+        </div>
+        <div class="item-block">
+            <div class="item-name">🗳️ 打歌投票合集</div>
+            <div class="desc">回归周实时投票会出日程表，先攒票后及时跟着数据站投票</div>
+            <div class="link-list">
+                <a href="#" class="link-btn">本周投票总指南</a>
+                <a href="#" class="link-btn">紧急投票链接</a>
+            </div>
+        </div>
     </div>
 
-    <!-- 投票软件下载方法 -->
-    <div class="section-title">📲 投票软件下载</div>
+    <!-- ========= 第四部分：答疑和反馈 ========= -->
+    <!-- 答疑 & 反馈 板块（替换原 #faq 内容） -->
+<div id="faq" class="section-card">
+    <div class="section-title"><span>❓</span> 答疑 & 粉丝群</div>
     
-    <!-- 安卓用户（小红书链接已移到这里） -->
-    <div id="android" class="card">
-        <div class="card-title">🤖 安卓用户</div>
-        <div class="list-item"><strong>方法1：安大师 + 夸克</strong> —— 基本能实现所需软件下载<div class="flex-row">
-                <a href="https://pan.quark.cn/s/ff321337568d" class="btn small">🔗 点此下载安大师</a> <!-- 替换为实际链接 -->
-            </div>
+    <!-- 微信群答疑入口 -->
+    <div class="item-block">
+        <div class="item-name">💬 微信粉丝群 · 实时答疑</div>
+        <div class="desc">
+            扫码加入打榜互助群，<strong>无需登录</strong>即可提问，群内粉丝一起解答。<br>
+            ⚠️ 如二维码失效，请私信微博 @你的账号 获取最新入口。
         </div>
-        <div class="list-item"><strong>方法2：apkpure</strong> —— 需挂t，无mnetplus 
-            <div class="flex-row">
-                <a href="https://apkpure.net/cn/" class="btn small">🔗 点此下载apkpure</a> <!-- 替换为实际链接 -->
-            </div>
+        <!-- 二维码占位：请替换为真实的微信群二维码图片链接 -->
+        <div style="text-align: center; margin: 16px 0;">
+            <img src="此处替换为微信群二维码图片链接" alt="微信群二维码" style="width: 200px; border-radius: 16px; border: 1px solid #c8e0d0;">
+            <p style="font-size: 12px; color: #7e9d8c; margin-top: 8px;">微信扫一扫，加入打榜互助群</p>
         </div>
-        <div class="list-item"><strong>方法3：Qoo</strong> —— 目前只适用idolchamp
-            <div class="flex-row">
-                <a href="https://apps.qoo-app.com/app/880" class="btn small">🔗 点此下载Qoo</a>
-            </div>
+        <div class="link-list">
+            <a href="#" class="link-btn">📢 反馈失效二维码</a>
         </div>
-        <div class="list-item"><strong>方法4：百度搜索“软件名+直接下载”</strong> —— 注意选择“直接下载”链接，避开捆绑软件</div>
-        <div class="list-item"><strong>部分有谷歌服务手机：下载谷歌商店，在谷歌商店内下载</strong></div>
+    </div>
+
+    <!-- 粉丝妙招墙（游客分享） -->
+    <div class="item-block">
+        <div class="item-name">💡 粉丝发现墙</div>
+        <div class="desc">
+            这里收集了大家分享的打榜小技巧、隐藏攻略。点击标题展开查看详情。<br>
+            🌟 如果你也有妙招，请通过<a href="#">此链接</a>提交（免登录），我们会定期精选更新。
+        </div>
         
-        <!-- 小红书链接放在这里，紧挨着“部分手机通用” -->
-        <div class="tip">
-            💡 参考小红书详细教程：<br>
-            <a href="http://xhslink.com/o/6AlbgyOWuUB" target="_blank" class="link-text">http://xhslink.com/o/6AlbgyOWuUB</a>
-        </div>
-        
-
-    <!-- 苹果用户 -->
-    <div id="ios" class="card">
-        <div class="card-title">🍎 苹果用户</div>
-        <div class="list-item">苹果商店直接搜索下载idolchamp、mnetplus、higher</div>
-        <div class="tip">
-            💡 其他软件需借国外id登录下载，可向其他粉丝借用或自寻教程注册<br>
-                    </div>
-  
-    <!-- 各APP攒票教程 -->
-    <div class="section-title">💖 攒心（票）教程</div>
-
-    <!-- idolchamp -->
-    <div id="idolchamp" class="card">
-        <div class="card-title">📱 idolchamp <span class="badge">注册+攒心</span></div>
-        <div class="image-placeholder">
-            🖼️ 此处放 idolchamp 注册/攒心截图或视频<br>
-            （建议：步骤1...步骤2...）
-        </div>
-        <p style="margin: 8px 0; color: #475569;">💡 简要说明：下载后注册，每日完成任务得心，然后投票。</p>
-        <a href="#" class="btn secondary small">📸 查看详细图文</a>
-    </div>
-
-    <!-- mubeat -->
-    <div id="mubeat" class="card">
-        <div class="card-title">📱 mubeat <span class="badge">注册+攒心</span></div>
-        <div class="image-placeholder">
-            🖼️ 此处放 mubeat 注册/攒心截图或视频
-        </div>
-        <p style="margin: 8px 0; color: #475569;">💡 说明：观看广告、每日签到可攒心。</p>
-        <a href="#" class="btn secondary small">📸 查看详细图文</a>
-    </div>
-
-    <!-- mnetplus -->
-    <div id="mnetplus" class="card">
-        <div class="card-title">📱 mnetplus <span class="badge">注册+攒心</span></div>
-        <div class="image-placeholder">
-            🖼️ 此处放 mnetplus 注册/攒心截图或视频
-        </div>
-        <p style="margin: 8px 0; color: #475569;">💡 说明：每日任务、投票后可获得心。</p>
-        <a href="#" class="btn secondary small">📸 查看详细图文</a>
-    </div>
-
-    <!-- superstarX/higher -->
-    <div id="superstar" class="card">
-        <div class="card-title">📱 superstarX / higher <span class="badge">注册+攒心</span></div>
-        <div class="image-placeholder">
-            🖼️ 此处放 superstarX/higher 注册/攒心截图或视频
-        </div>
-        <p style="margin: 8px 0; color: #475569;">💡 说明：玩游戏攒心，具体看图片教程。</p>
-        <a href="#" class="btn secondary small">📸 查看详细图文</a>
-    </div>
-
-    <!-- 补充说明：安装包超链接汇总 -->
-    <div id="download" class="card" style="background: #f0f4ff;">
-        <div class="card-title">📦 安装包快捷下载</div>
-        <div class="flex-row" style="justify-content: center;">
-            <a href="#" class="btn small">apkpure</a>
-            <a href="#" class="btn small">qoo</a>
-            <a href="#" class="btn small">idolchamp</a>
-            <a href="#" class="btn small">mubeat</a>
-            <a href="#" class="btn small">mnetplus</a>
-            <a href="#" class="btn small">superstarX</a>
-        </div>
-        <p style="text-align: center; margin-top: 12px; color: #4f46e5;">⬆️ 点击上方按钮下载（链接待替换）</p>
-    </div>
-
-    <!-- 粉丝群入口 -->
-    <div id="group" class="card" style="background: linear-gradient(145deg, #fff, #f9f9ff);">
-        <div class="card-title" style="justify-content: center;">👥 加入粉丝互助群</div>
-        <p style="text-align: center; margin-bottom: 16px;">一起交流，不错过每日任务！</p>
-        <a href="#" class="btn">💬 点击进群</a>
-        <div class="image-placeholder" style="margin-top: 16px;">
-            🖼️ 此处放群二维码
+        <!-- 示例发现1 -->
+        <details style="background: #f9f9f9; border-radius: 12px; padding: 12px; margin: 12px 0; border: 1px solid #e0f0e0;">
+            <summary style="font-weight: 600; cursor: pointer; color: #2e7d5e;">✨ 发现：(举例)mubeat、higher用欧美梯广告更短</summary>
+            <p style="margin-top: 8px; color: #4a6b5c;"> 具体说明如下巴拉巴拉。</p>
+        </details>
+                      
+        <div class="link-list">
+            <a href="#" class="link-btn">📤 提交我的妙招</a>
+            <a href="#" class="link-btn">🔍 查看更多历史妙招</a>
         </div>
     </div>
+</div>
 
-    <div class="footer">
-        <p>制作：你的粉丝站 | 教程更新于2025.03.17</p>
-        <p>✨ 一切为了偶像，加油！ ✨</p>
+<!-- 悬浮目录按钮 -->
+<div class="float-dir-btn" id="floatDirBtn">
+    <span>📑</span>
+</div>
+
+<!-- 全屏目录浮层 -->
+<div class="dir-overlay" id="dirOverlay">
+    <div class="dir-panel">
+        <h3>📚 快速跳转 <span>🐸✨</span></h3>
+        <div class="dir-group">
+            <div class="dir-group-title">📋 准备工作</div>
+            <a href="#prep" class="dir-link">🔍 科普 / 软件下载</a>
+        </div>
+        <div class="dir-group">
+            <div class="dir-group-title">🎫 攒票阶段</div>
+            <a href="#saveTickets" class="dir-link">🇨🇳 国内软件</a>
+            <a href="#saveTickets" class="dir-link">🌍 国外攒票</a>
+        </div>
+        <div class="dir-group">
+            <div class="dir-group-title">🚀 回归阶段</div>
+            <a href="#comeback" class="dir-link">🇨🇳 国内音源</a>
+            <a href="#comeback" class="dir-link">🌍 国外音源/投票</a>
+        </div>
+        <div class="dir-group">
+            <a href="#faq" class="dir-link">❓ 答疑 & 粉丝群</a>
+        </div>
+        <button class="close-dir" id="closeDirBtn">关闭</button>
     </div>
+</div>
 
-    <!-- 说明：所有带 # 的链接都需要替换成你的实际地址 -->
+<div class="deco">🐸 ∞ ✨ 🌟</div>
+<div class="infinity">∞</div>
+
+<script>
+    const floatBtn = document.getElementById('floatDirBtn');
+    const overlayDir = document.getElementById('dirOverlay');
+    const closeBtn = document.getElementById('closeDirBtn');
+
+    function openDir() { overlayDir.classList.add('open'); }
+    function closeDir() { overlayDir.classList.remove('open'); }
+
+    floatBtn.addEventListener('click', openDir);
+    closeBtn.addEventListener('click', closeDir);
+    overlayDir.addEventListener('click', function(e) {
+        if (e.target === overlayDir) closeDir();
+    });
+
+    const dirLinks = document.querySelectorAll('.dir-link');
+    dirLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                closeDir();
+                const yOffset = -80;
+                const y = targetElement.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                window.scrollTo({ top: y, behavior: 'smooth' });
+            }
+        });
+    });
+</script>
 </body>
 </html>
