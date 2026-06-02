@@ -384,7 +384,51 @@ details[open] > summary::before {
 .dir-link:hover {
     background: #e2f0e2;
     border-radius: 20px;
-}    </style>
+}
+/* ========== 强力手机自适应修复 ========== */
+* {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+body, .container, .section-card, .item-block, .sub-title, .tip, .link-list, .desc, .item-name, .dir-panel, .search-panel {
+    overflow-x: hidden !important;
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    white-space: normal !important;
+}
+
+/* 限制卡片最大宽度为屏幕宽度减边距 */
+.section-card, .item-block {
+    width: 100%;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 确保链接按钮不会溢出 */
+.link-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.link-btn {
+    white-space: normal;
+    word-break: keep-all; /* 避免中文单词被截断 */
+    flex-shrink: 0;
+}
+
+/* 图片和视频自适应 */
+img, iframe, video {
+    max-width: 100%;
+    height: auto;
+}
+
+/* 防止 tip 内的长链接溢出 */
+.tip a {
+    word-break: break-all;
+}    
+</style>
 </head>
 <body>
 
