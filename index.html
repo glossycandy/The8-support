@@ -291,50 +291,146 @@
     color: #7e9d8c;
     padding: 0 8px;
 }
-    </style>
+
+/* ========== 手机自适应修复 ========== */
+.container, .section-card, .item-block, .sub-title, .tip, .link-list {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* 防止长链接或单词溢出 */
+.desc, .tip, .link-btn {
+    word-break: break-word;
+    white-space: normal;
+}
+
+/* 按钮在手机上自动换行 */
+.link-list {
+    flex-wrap: wrap;
+}
+
+/* 图片/视频等媒体元素自适应 */
+img, iframe, video {
+    max-width: 100%;
+    height: auto;
+}
+
+/* 确保搜索面板在小屏幕不超出左右边界 */
+.search-panel {
+    max-width: calc(100% - 40px);
+    left: 20px;
+    right: 20px;
+}
+
+/* 目录二级分组 */
+.dir-group {
+    margin-bottom: 12px;
+    border: 1px solid #e0f0e0;
+    border-radius: 16px;
+    padding: 0 12px;
+    background: #fefef7;
+}
+.dir-group summary {
+    cursor: pointer;
+    font-weight: bold;
+    padding: 12px 0;
+    list-style: none;
+}
+.dir-group summary::-webkit-details-marker {
+    display: none;
+}
+.dir-group summary::before {
+    content: "▶ ";
+    color: #2e7d5e;
+    font-size: 14px;
+}
+details[open] > summary::before {
+    content: "▼ ";
+}
+/* 三级子分组 */
+.dir-subgroup {
+    margin-left: 16px;
+    margin-top: 4px;
+    margin-bottom: 8px;
+    border-left: 2px solid #c8e0d0;
+    padding-left: 12px;
+}
+.dir-subgroup summary {
+    cursor: pointer;
+    font-weight: 500;
+    padding: 6px 0;
+    list-style: none;
+    color: #2e7d5e;
+}
+.dir-subgroup summary::-webkit-details-marker {
+    display: none;
+}
+.dir-subgroup summary::before {
+    content: "▶ ";
+    font-size: 12px;
+}
+.dir-subgroup[open] summary::before {
+    content: "▼ ";
+}
+/* 目录链接样式 */
+.dir-link {
+    display: block;
+    padding: 6px 0 6px 24px;
+    color: #1e3a2f;
+    text-decoration: none;
+    font-size: 14px;
+    border-bottom: none;
+}
+.dir-link:hover {
+    background: #e2f0e2;
+    border-radius: 20px;
+}    </style>
 </head>
 <body>
 
 <div class="hero">
     <h1>徐明浩小分队即将回归！</h1>
-    <p><span>✨</span> 打榜资源一站汇总 <span>✨</span></p>
+    <p><span>✨</span> 音源打榜资源一站汇总 <span>✨</span></p>
 </div>
 
 <div class="container" id="mainContent">
     <!-- ========= 第一部分：准备工作 ========= -->
     <div id="prep" class="section-card">
-        <div class="section-title"><span>📋</span> 准备工作</div>
+        <div class="section-title"><span>📋</span> 第一步：准备工作</div>
         
         <!-- 科普了解（保留） -->
         <div class="item-block">
             <div class="item-name">🔍 科普了解</div>
             <div class="desc">为什么需要打榜？音源/投票是什么？回归期怎么做最有效？
-            <p>1.先准备科学上网工具(因为使用感都不一样不做具体推荐，给几个名字大家用过的：樱花猫、矿泉水、快连、快喵、yuko等，还有一些免费的xhs搜一搜)</p>
+        </div>
+            <p>1.先准备科学上网工具 (因为使用感都不一样不做具体推荐，给几个名字大家用过的：樱花猫、矿泉水、快连、快喵、yuko等，还有一些免费的xhs搜一搜)</p>
             <p>2.将所需软件下载好：
-            <p>国内各听歌软件QQ音乐❗、酷狗酷我；
-            <p>国外音源(melon❗、Spotify)+打歌投票(idolchamp、mubeat、mnetplus、higher实时、linc/tin事前)</p>
+            <p>国内各听歌软件<strong>QQ音乐❗</strong>、酷狗酷我等；
+            <p>国外音源(<strong>Melon❗</strong>、Spotify)+打歌投票(idolchamp、mubeat、mnetplus、linc/tin事前+higher实时)</p>
             <p>3.正式回归前先将在听歌和打歌软件攒票(下面有下载注册攒票教程)</p>
-
-</div>
+        </div>
             <div class="link-list">
                 <a href="https://weibo.com/8008561108/5303955094505470" class="link-btn">📖 微博科普</a>
             </div>
-        </div>
 
         <!-- 软件下载（恢复为详细安卓/苹果分类） -->
         <div class="item-block">
             <div class="item-name">📲 软件下载 · 安卓用户</div>
             <div class="desc">
-                <strong>方法1：</strong>安大师 + 夸克（基本能实现所有软件下载）<br>
+                <strong>方法1：</strong>安大师 + 夸克（基本能安装所有软件）<br>
         <div class="tip">
                 💡 在夸克下载以后压缩包后缀改为zip后打开：<br>
                 <a href="#" style="color:#2e7d5e;">https://pan.quark.cn/s/d6043dce0860</a>
-            </div>
+           </div>
                 <strong>方法2：</strong>apkpure（mnetplus需单独找安装包）<br>
            <div class="link-list">
                 <a href="https://apkpure.net/cn/" class="link-btn">📦 apkpure点此下载</a>
-                 </div>
+           </div>
+        </div>
+            <div class="desc">
                 <strong>方法3：</strong>百度搜索“软件名+直接下载”，注意避开捆绑软件<br>
+           </div>
+           <div class="desc">
                 <strong>部分手机通用：</strong>下载谷歌商店，在谷歌商店内下载<br>
                 <span style="color:#d9534f;">⚠️ 华为手机无谷歌服务，建议用方法1或2</span>
             </div>
@@ -348,18 +444,18 @@
             <div class="item-name">🍎 软件下载 · 苹果用户</div>
             <div class="desc">借国外Apple ID登录App Store下载（可借用可购买临时账号等）</div>
             <div class="link-list">
-                <a href="https://weibo.com/3861028956/5103091512251376" class="link-btn">不借用id(仅供参考)</a>
+                <a href="https://weibo.com/3861028956/5103091512251376" class="link-btn">不借用id教程(仅供参考)</a>
             </div>
         </div>
     </div>
 
     <!-- ========= 第二部分：攒票阶段 ========= -->
     <div id="saveTickets" class="section-card">
-        <div class="section-title"><span>🎫</span> 攒票阶段</div>
+        <div class="section-title"><span>🎫</span> 第二步：攒票阶段</div>
         
         <!-- 国内软件 -->
         <div class="sub-title">🇨🇳 国内软件</div>
-        <div class="item-block">
+        <div class="item-block" id="domestic">
             <div class="item-name">🐧 QQ音乐、酷狗、酷我</div>
             <div class="desc">由你榜攒积分、可多创小号(1手机号可申5个qq号)</div>
             <div class="link-list">
@@ -370,44 +466,44 @@
       
         <!-- 国外攒票软件 -->
         <div class="sub-title">🌍 国外软件（攒票/投票）</div>
-        <div class="item-block">
-            <div class="item-name">🏆 Idolchamp (冠军秀)</div>
-            <div class="desc">注册、每日攒心、投票流程</div>
+        <div class="item-block" id="idolchamp">
+            <div class="item-name">🏆 Idolchamp</div>
+            <div class="desc">冠军秀--注册、每日攒心、投票流程</div>
             <div class="link-list">
                 <a href="https://weibo.com/7503303629/5277140859224626" class="link-btn">⭐ 数数官方教程</a>
                 <a href="https://weibo.com/5643129991/5277566183147297" class="link-btn">🐸 粉丝分享教程</a>
             </div>
         </div>
-        <div class="item-block">
+        <div class="item-block" id="mubeat">
             <div class="item-name">📀 Mubeat</div>
-            <div class="desc">注册、每日攒心、投票流程</div>
+            <div class="desc">音乐中心--注册、每日攒心、投票流程</div>
             <div class="link-list">
                 <a href="https://weibo.com/7503303629/5281932381785509" class="link-btn">⭐ 数数官方教程</a>
                 <a href="https://weibo.com/5643129991/5282208828885150" class="link-btn">🐸 粉丝分享教程</a>
             </div>
         </div>
-        <div class="item-block">
+        <div class="item-block" id="higher">
             <div class="item-name">⭐ Linc/tin(事前) | Higher(实时)</div>
-            <div class="desc">注册、每日攒心、投票流程</div>
+            <div class="desc">人气歌谣--注册、每日攒心、投票流程</div>
             <div class="link-list">
                 <a href="https://weibo.com/7503303629/5279410408131136" class="link-btn">⭐ 数数官方教程</a>
                 <a href="https://weibo.com/5643129991/5280071402914935" class="link-btn">🐸 粉丝教程-事前</a>
                 <a href="https://weibo.com/5643129991/5279704917475805" class="link-btn">🐸 粉丝教程-实时</a>
             </div>
         </div>
-        <div class="item-block">
+        <div class="item-block" id="mnetplus">
             <div class="item-name">🔴 Mnet Plus</div>
             <div class="desc">注册、每日攒心、投票流程</div>
             <div class="link-list">
                 <a href="https://weibo.com/7503303629/5304670084145963" class="link-btn">⭐ 数数官方教程</a>
-                <a href="#" class="link-btn">🐸 粉丝分享教程</a>
+                <a href="#" class="link-btn">🐸 粉丝分享教程(暂无)</a>
             </div>
         </div>
     </div>
 
     <!-- ========= 第三部分：回归阶段 ========= -->
     <div id="comeback" class="section-card">
-        <div class="section-title"><span>🚀</span> 回归阶段</div>
+        <div class="section-title"><span>🚀</span> 第三步：回归阶段</div>
         
    <div class="tip">
                 💡 回归期三步：专辑购买、音源播放、打歌投票；具体安排事项到时数数会出时间安排表，先熟悉操作，跟着走就行<br>
@@ -416,7 +512,7 @@
 
         <!-- 国内音源 -->
         <div class="sub-title">🇨🇳 国内音源</div>
-        <div class="item-block">
+        <div class="item-block" id="domestic-cb">
             <div class="item-name">QQ音乐 · 酷狗 · 酷我</div>
             <div class="desc">回归期重点：专辑购买、音源播放、榜单推荐（可以重点先学习QQ音乐的新歌必做、由你榜积分、三清教程）</div>
             <div class="link-list">
@@ -431,7 +527,7 @@
 
         <!-- 国外音源 + 打歌投票 -->
         <div class="sub-title">🌍 国外音源 & 打歌投票</div>
-        <div class="item-block">
+        <div class="item-block" id="melon">
             <div class="item-name">🍈 Melon</div>
             <div class="desc">下载、套餐购买、登入登出、基础设置、缓存、歌单等
                 <p>1.下载安装
@@ -449,13 +545,13 @@
             <div class="link-list">
                 <a href="https://weibo.com/7742872929/5105346153021864" class="link-btn">粉丝录屏教程1(下载、登录、基础设置、歌单、激活、歌曲下载删除)</a>
                 <a href="https://weibo.com/6839202774/5102998202613977" class="link-btn">粉丝录屏教程2(登录、点赞、基础设置、歌单)</a>
-             </div>
+           </div>
            <div class="desc">套餐购买后：回归期
                 <p>4.回归前一两天激活套餐
                 <p>5.回归首小时内下载删除歌曲
                 <p>6.每天切瓜：晚11点清缓存+建歌单
-              </div>
-              <div class="link-list">
+           </div>
+           <div class="link-list">
                 <a href="https://weibo.com/7503303629/5106116302471530" class="link-btn">安卓余额下载</a>
                 <a href="https://weibo.com/7503303629/5106117176723994" class="link-btn">ios礼物盒下载</a>
                 <a href="https://weibo.com/7503303629/5106856662140645" class="link-btn">windows激活下载</a>
@@ -464,30 +560,31 @@
                 <p>
                 <a href="https://weibo.com/6839202774/5106549511423568" class="link-btn">melon定时和防断</a>
                 <a href="https://weibo.com/7710312293/5106915579265996" class="link-btn">melon切瓜次数</a>
-            </div>
+           </div>
+           </div>
         </div>
-        <div class="item-block">
+        <div class="item-block" id="spotify">
             <div class="item-name">🟢 Spotify</div>
-            <div class="desc">海外区账号、歌单循环、音量规范</div>
+            <div class="desc">全球音乐流媒体平台、歌单循环</div>
             <div class="link-list">
                 <a href="https://weibo.com/7859023491/5098756091937201" class="link-btn">⭐ 狂想图文教程</a>
-                <a href="#" class="link-btn">🐸 粉丝分享教程</a>
+                <a href="#" class="link-btn">🐸 粉丝分享教程(暂无)</a>
             </div>
         </div>
-        <div class="item-block">
+        <div class="item-block" id="youtube">
             <div class="item-name">▶️ Youtube</div>
-            <div class="desc">注册、刷管</div>
+            <div class="desc">视频播放软件、刷管</div>
             <div class="link-list">
                 <a href="https://weibo.com/7859023491/5099118586495932" class="link-btn">⭐ 狂想图文教程</a>
-                <a href="#" class="link-btn">🐸 粉丝分享教程</a>
+                <a href="#" class="link-btn">🐸 粉丝分享教程(暂无)</a>
             </div>
         </div>
-        <div class="item-block">
-            <div class="item-name">🗳️ 打歌投票合集</div>
-            <div class="desc">回归周实时投票会出日程表，先攒票后及时跟着数据站投票</div>
+        <div class="item-block" id="vote">
+            <div class="item-name">🗳️ 打歌投票</div>
+            <div class="desc">回归周投票会出日程表，先攒票后及时跟着数据站投票</div>
             <div class="link-list">
-                <a href="#" class="link-btn">本周投票总指南</a>
-                <a href="#" class="link-btn">紧急投票链接</a>
+                <a href="#" class="link-btn">本周投票总指南(暂无)</a>
+                <a href="#" class="link-btn">紧急投票链接(暂无)</a>
             </div>
         </div>
     </div>
@@ -515,27 +612,26 @@
     </div>
 
     <!-- 粉丝妙招墙（游客分享） -->
-    <div class="item-block">
-        <div class="item-name">💡 粉丝发现墙</div>
+    <div class="item-block" id="tips">
+        <div class="item-name">💡 粉丝小妙招</div>
         <div class="desc">
             这里收集了大家分享的打榜小技巧、隐藏攻略。点击标题展开查看详情。<br>
-            🌟 如果你也有妙招，请通过<a href="#">此链接</a>提交（免登录），我们会定期精选更新。
+            🌟 如果你也有妙招，请通过<a href="https://docs.qq.com/sheet/DRnBmQm12S0l4TWxv">此链接</a>提交（免登录），我们会定期精选更新。
         </div>
         
         <!-- 示例发现1 -->
         <details style="background: #f9f9f9; border-radius: 12px; padding: 12px; margin: 12px 0; border: 1px solid #e0f0e0;">
-            <summary style="font-weight: 600; cursor: pointer; color: #2e7d5e;">✨ 发现：(举例)mubeat、higher用欧美梯广告更短</summary>
+            <summary style="font-weight: 600; cursor: pointer; color: #2e7d5e;">✨ 发现：(举例)melon夜间可以通过手机的快捷指令操作防断</summary>
             <p style="margin-top: 8px; color: #4a6b5c;"> 具体说明如下巴拉巴拉。</p>
         </details>
                       
         <div class="link-list">
-            <a href="#" class="link-btn">📤 提交我的妙招</a>
-            <a href="#" class="link-btn">🔍 查看更多历史妙招</a>
+             <a href="https://docs.qq.com/sheet/DRnBmQm12S0l4TWxv" class="link-btn">🔍 查看更多历史妙招</a>
         </div>
     </div>
 </div>
 
-<!-- 悬浮目录按钮 -->
+<!-- 悬浮按钮 -->
 <!-- 左下角搜索悬浮按钮 -->
 <div class="float-search-btn" id="floatSearchBtn">
     <span>🔍</span>
@@ -553,26 +649,59 @@
 <!-- 右下角全屏目录浮层 -->
 <div class="dir-overlay" id="dirOverlay">
     <div class="dir-panel">
-        <h3>📚 快速跳转 <span>🐸✨</span></h3>
-        <div class="dir-group">
-            <div class="dir-group-title">📋 准备工作</div>
-            <a href="#prep" class="dir-link">🔍 科普 / 软件下载</a>
-        </div>
-        <div class="dir-group">
-            <div class="dir-group-title">🎫 攒票阶段</div>
-            <a href="#saveTickets" class="dir-link">🇨🇳 国内软件</a>
-            <a href="#saveTickets" class="dir-link">🌍 国外攒票</a>
-        </div>
-        <div class="dir-group">
-            <div class="dir-group-title">🚀 回归阶段</div>
-            <a href="#comeback" class="dir-link">🇨🇳 国内音源</a>
-            <a href="#comeback" class="dir-link">🌍 国外音源/投票</a>
-        </div>
-        <div class="dir-group">
-            <a href="#faq" class="dir-link">❓ 答疑 & 粉丝群</a>
-        </div>
-        <button class="close-dir" id="closeDirBtn">关闭</button>
-    </div>
+    <h3>📚 快速跳转 <span>🐸✨</span></h3>
+    
+    <!-- 二级：准备工作 -->
+    <details class="dir-group" open>
+        <summary class="dir-group-title">📋 准备工作</summary>
+        <a href="#prep" class="dir-link">🔍 科普了解 / 软件下载</a>
+    </details>
+    
+    <!-- 二级：攒票阶段 -->
+    <details class="dir-group" open>
+        <summary class="dir-group-title">🎫 攒票阶段</summary>
+        <!-- 三级：国内软件 -->
+        <details class="dir-subgroup" open>
+            <summary class="dir-subgroup-title">🇨🇳 国内软件</summary>
+            <a href="#domestic" class="dir-link">🐧 QQ音乐/酷狗/酷我</a>
+        </details>
+        <!-- 三级：国外软件 -->
+        <details class="dir-subgroup" open>
+            <summary class="dir-subgroup-title">🌍 国外软件（攒票/投票）</summary>
+            <a href="#idolchamp" class="dir-link">🏆 Idolchamp</a>
+            <a href="#mubeat" class="dir-link">📀 Mubeat</a>
+            <a href="#higher" class="dir-link">⭐ Higher / Link</a>
+            <a href="#mnetplus" class="dir-link">🔴 Mnet Plus</a>
+        </details>
+    </details>
+    
+    <!-- 二级：回归阶段 -->
+    <details class="dir-group" open>
+        <summary class="dir-group-title">🚀 回归阶段</summary>
+        <!-- 三级：国内音源 -->
+        <details class="dir-subgroup" open>
+            <summary class="dir-subgroup-title">🇨🇳 国内音源</summary>
+            <a href="#domestic-cb" class="dir-link">QQ音乐/酷狗/酷我</a>
+        </details>
+        <!-- 三级：国外音源 & 投票 -->
+        <details class="dir-subgroup" open>
+            <summary class="dir-subgroup-title">🌍 国外音源 & 打歌投票</summary>
+            <a href="#melon" class="dir-link">🍈 Melon</a>
+            <a href="#spotify" class="dir-link">🟢 Spotify</a>
+            <a href="#youtube" class="dir-link">▶️ Youtube</a>
+            <a href="#vote" class="dir-link">🗳️ 打歌投票合集</a>
+        </details>
+    </details>
+    
+    <!-- 二级：答疑 & 粉丝群 -->
+    <details class="dir-group" open>
+        <summary class="dir-group-title">❓ 答疑 & 粉丝群</summary>
+        <a href="#faq" class="dir-link">💬 微信粉丝群</a>
+        <a href="#tips" class="dir-link">💡 粉丝发现墙</a>
+    </details>
+    
+    <button class="close-dir" id="closeDirBtn">关闭</button>
+</div>
 </div>
 
 <div class="deco">🐸 ∞ ✨ 🌟</div>
