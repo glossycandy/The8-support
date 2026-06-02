@@ -684,6 +684,15 @@ img, iframe, video {
     </div>
 </div>
 
+<div style="text-align: center; margin: 20px;">
+    <button id="forceReloadBtn" style="background: #2e7d5e; color: white; border: none; padding: 10px 20px; border-radius: 40px; font-size: 14px;">🔄 如果内容不是最新的，点我强制刷新</button>
+</div>
+<script>
+    document.getElementById('forceReloadBtn').addEventListener('click', function() {
+        window.location.reload(true);  // true 代表强制从服务器重新加载，跳过缓存
+    });
+</script>
+
 <!-- 悬浮按钮 -->
 <!-- 左下角搜索悬浮按钮 -->
 <div class="float-search-btn" id="floatSearchBtn">
