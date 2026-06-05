@@ -311,14 +311,21 @@
             width: 100%;
         }
         .deco {
-            position: fixed;
-            bottom: 20px;
-            left: 16px;
-            font-size: 24px;
-            opacity: 0.3;
-            pointer-events: none;
-            z-index: 999;
-        }
+    position: fixed;
+    bottom: 20px;          /* 放在圆点（通常bottom:10px）上方一点 */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;       /* 变小 */
+    color: #48c48c;        /* 用主题色，更协调 */
+    opacity: 0.5;
+    pointer-events: none;  /* 让文字不干扰点击 */
+    z-index: 999;
+    white-space: nowrap;
+    background: rgba(255,255,240,0.6); /* 可选：半透背景提高可读性 */
+    padding: 4px 12px;
+    border-radius: 40px;
+    backdrop-filter: blur(4px);
+}
         .infinity {
             position: fixed;
             top: 100px;
@@ -334,7 +341,10 @@
             margin: 20px auto;
             display: block;
         }
-    </style>
+.search-result-item:active {
+    background: #e2f0e2;
+}
+</style>
 </head>
 <body>
 
@@ -383,7 +393,7 @@
                     <p>3. 正式回归前先将在听歌和打歌软件攒票 (下面第二步里有下载注册攒票教程) </p>
                     <div class="link-list"><a href="https://weibo.com/8008561108/5303955094505470" class="link-btn">📖 微博科普</a></div>
                 </div>
-                <div class="item-block">
+                <div class="item-block" id="android-download">
                     <div class="item-name">📲 软件下载 · 安卓用户</div>
                     <div class="desc">
                         <strong>方法1：</strong>安大师 + 夸克（基本能安装所有软件）<br>
@@ -395,7 +405,7 @@
                     <div class="desc"><strong>部分手机通用：</strong>下载谷歌商店，在谷歌商店内下载<br><span style="color:#d9534f;">⚠️ 华为手机无谷歌服务，建议用方法1或2</span></div>
                     <div class="tip">💡 小红书参考教程：<a href="http://xhslink.com/o/6AlbgyOWuUB" target="_blank" style="color:#48c48c;">小红书分享</a></div>
                 </div>
-                <div class="item-block">
+                <div class="item-block" id="ios-download">
                     <div class="item-name">🍎 软件下载 · 苹果用户</div>
                     <div class="desc">借国外Apple ID登录App Store下载（可借用可购买临时账号等）</div>
                     <div class="link-list"><a href="https://weibo.com/3861028956/5103091512251376" class="link-btn">不借用id教程(仅供参考)</a></div>
@@ -532,12 +542,12 @@
         <div class="swiper-slide">
             <div id="album" class="section-card">
                 <div class="section-title"><span>💿</span> 专辑购买指导</div>
-                <div class="item-block">
+                <div class="item-block" id="album-kp">
                     <div class="item-name">📖 专辑知识科普</div>
                     <div class="desc"><p>📌 什么是初动？什么是Hanteo/Gaon榜？为什么买专辑对一位有帮助？</p><p>✨ 通常专辑会有预售、一批、二批，预售和一批销量最重要，直接影响打歌节目销量分和一位候补资格。</p><p>💡 不同版本（PB版、KIT版、C版/韭菜盘、WVS版/电子专等）计入榜单规则相同，请优先选择粉丝吧代购链接确保计入销量榜。</p></div>
                     <div class="link-list"><a href="https://weibo.com/7742872929/5276735106978282" class="link-btn" target="_blank">专辑购买科普</a></div>
                 </div>
-                <div class="item-block">
+                <div class="item-block" id="album-buy">
                     <div class="item-name">🛒 购买渠道</div>
                     <div class="desc"><p>🔹 以下为粉丝大吧组织的代购链接，销量将全部计入，助力一位！</p><p>🔹 请选择正规代购，避免计入不计销量的渠道。</p></div>
                     <div class="link-list"><a href="#" class="link-btn" target="_blank">🌟 浩吧代购链接1（待更新）</a></div>
@@ -551,7 +561,7 @@
         <div class="swiper-slide">
             <div id="faq" class="section-card">
                 <div class="section-title"><span>❓</span> 答疑 & 粉丝群</div>
-                <div class="item-block">
+                <div class="item-block" id="fangroup">
                     <div class="item-name">💬 微信粉丝群 · 实时答疑</div>
                     <div class="desc">扫码加入打榜互助群，<strong>无需登录</strong>即可提问，群内粉丝一起解答。<br>⚠️ 如二维码失效，请私信微博 @ 获取最新入口。</div>
                     <div style="text-align: center; margin: 16px 0;">
@@ -585,6 +595,7 @@
 <div class="search-panel" id="searchPanel">
     <input type="text" id="searchInput" placeholder="输入关键词 例如：Melon 下载">
     <div class="search-status" id="searchStatus">✨ 输入关键词后自动过滤当前页的教程卡片</div>
+    <div id="searchResults" style="max-height: 200px; overflow-y: auto; display: none; margin: 8px 0;"></div>
     <button class="close-search" id="closeSearchBtn">关闭</button>
 </div>
 <div class="float-dir-btn" id="floatDirBtn"><span>目录</span></div>
@@ -679,48 +690,127 @@ const swiper = new Swiper('.swiper', {
     dirOverlay.addEventListener('click', (e) => { if (e.target === dirOverlay) closeDirOverlay(); });
 
     // 搜索功能（仅当前激活的 slide 内搜索）
-    const searchBtn = document.querySelector('.float-search-btn');
-    const searchPanel = document.getElementById('searchPanel');
-    const searchInput = document.getElementById('searchInput');
-    const searchStatus = document.getElementById('searchStatus');
-    const closeSearchBtn = document.getElementById('closeSearchBtn');
+    // ========== 全局搜索功能（跨所有 slide） ==========
+const searchBtn = document.querySelector('.float-search-btn');
+const searchPanel = document.getElementById('searchPanel');
+const searchInput = document.getElementById('searchInput');
+const searchStatus = document.getElementById('searchStatus');
+const searchResultsDiv = document.getElementById('searchResults');
+const closeSearchBtn = document.getElementById('closeSearchBtn');
 
-    function openPanel() { searchPanel.classList.add('open'); searchInput.focus(); }
-    function closePanel() { searchPanel.classList.remove('open'); searchInput.value = ''; filterCurrentSlide(); }
-    searchBtn.addEventListener('click', (e) => { e.stopPropagation(); openPanel(); });
-    closeSearchBtn.addEventListener('click', (e) => { e.stopPropagation(); closePanel(); });
-    document.addEventListener('click', (e) => {
-        if (searchPanel.classList.contains('open') && !searchPanel.contains(e.target) && e.target !== searchBtn) closePanel();
-    });
+function openPanel() { searchPanel.classList.add('open'); searchInput.focus(); }
+function closePanel() { 
+    searchPanel.classList.remove('open'); 
+    searchInput.value = ''; 
+    searchResultsDiv.style.display = 'none';
+    searchResultsDiv.innerHTML = '';
+    searchStatus.innerText = '✨ 输入关键词后自动过滤教程卡片';
+}
+searchBtn.addEventListener('click', (e) => { e.stopPropagation(); openPanel(); });
+closeSearchBtn.addEventListener('click', (e) => { e.stopPropagation(); closePanel(); });
+document.addEventListener('click', (e) => {
+    if (searchPanel.classList.contains('open') && !searchPanel.contains(e.target) && e.target !== searchBtn) closePanel();
+});
 
-    function filterCurrentSlide() {
-        const activeSlide = document.querySelector('.swiper-slide-active');
-        if (!activeSlide) return;
-        const items = activeSlide.querySelectorAll('.item-block');
-        const raw = searchInput.value.trim();
-        if (raw === '') {
-            items.forEach(i => i.style.display = '');
-            searchStatus.innerText = '✨ 显示全部教程卡片';
-            return;
-        }
-        const keywords = raw.split(/\s+/).filter(k => k.length > 0);
-        let matchCount = 0;
-        items.forEach(item => {
-            const text = item.innerText.toLowerCase();
-            const allMatch = keywords.every(kw => text.includes(kw.toLowerCase()));
-            item.style.display = allMatch ? '' : 'none';
-            if (allMatch) matchCount++;
+// 收集所有 slide 中的 .item-block，并记录所在 slide 索引和卡片元素
+function buildGlobalIndex() {
+    const index = [];
+    const slides = document.querySelectorAll('.swiper-slide');
+    slides.forEach((slide, slideIdx) => {
+        const cards = slide.querySelectorAll('.item-block');
+        cards.forEach(card => {
+            // 提取卡片标题和内容文本
+            const titleElem = card.querySelector('.item-name');
+            const title = titleElem ? titleElem.innerText.trim() : '';
+            const text = card.innerText.trim();
+            index.push({
+                slideIdx: slideIdx,
+                card: card,
+                title: title,
+                text: text,
+            });
         });
-        searchStatus.innerText = `🔍 找到 ${matchCount} 个匹配的卡片（当前页）`;
+    });
+    return index;
+}
+
+let globalIndex = buildGlobalIndex();
+
+// 每次页面内容变化时（如动态加载）可重新构建，这里暂时不需要，因为内容固定
+
+function performGlobalSearch() {
+    const keywordRaw = searchInput.value.trim();
+    if (keywordRaw === '') {
+        searchResultsDiv.style.display = 'none';
+        searchResultsDiv.innerHTML = '';
+        searchStatus.innerText = '✨ 显示全部教程卡片';
+        return;
     }
-    searchInput.addEventListener('input', filterCurrentSlide);
-    swiper.on('slideChange', () => { if (searchInput.value.trim() !== '') filterCurrentSlide(); });
+    const keywords = keywordRaw.split(/\s+/).filter(k => k.length > 0);
+    const matches = [];
+    globalIndex.forEach(item => {
+        const searchText = (item.title + ' ' + item.text).toLowerCase();
+        const allMatch = keywords.every(kw => searchText.includes(kw.toLowerCase()));
+        if (allMatch) {
+            matches.push(item);
+        }
+    });
+    
+    if (matches.length === 0) {
+        searchStatus.innerText = `🔍 未找到匹配的卡片（关键词：${keywords.join(' + ')}）`;
+        searchResultsDiv.style.display = 'none';
+        searchResultsDiv.innerHTML = '';
+        return;
+    }
+    
+    // 生成结果列表
+    let html = '<div style="font-size:14px; padding:8px; background:#eef3ea; border-radius:12px;">找到以下结果：</div>';
+    matches.forEach(match => {
+        // 获取所在板块的名称（可以通过 slide 的标题或位置推测，简单起见显示 slide 索引+1）
+        const slideTitle = match.slideIdx === 0 ? '目录页' : 
+                           (match.slideIdx === 1 ? '准备工作' :
+                           (match.slideIdx === 2 ? '攒票阶段' :
+                           (match.slideIdx === 3 ? '回归阶段' :
+                           (match.slideIdx === 4 ? '专辑购买指导' :
+                           (match.slideIdx === 5 ? '答疑粉丝群' : '其他')))));
+        html += `
+            <div class="search-result-item" data-slide="${match.slideIdx}" data-card-id="${match.card.id || ''}" style="padding: 8px; margin: 6px 0; background: white; border-radius: 16px; cursor: pointer; border:1px solid #c8e0d0;">
+                <strong>${match.title || '未命名卡片'}</strong><br>
+                <small style="color: #7e9d8c;">📁 ${slideTitle}</small>
+            </div>
+        `;
+    });
+    searchResultsDiv.innerHTML = html;
+    searchResultsDiv.style.display = 'block';
+    searchStatus.innerText = `🔍 找到 ${matches.length} 个匹配的卡片（关键词：${keywords.join(' + ')}）`;
+    
+    // 绑定点击事件
+    document.querySelectorAll('.search-result-item').forEach(el => {
+        el.addEventListener('click', (e) => {
+            const slideIdx = parseInt(el.getAttribute('data-slide'), 10);
+            const cardId = el.getAttribute('data-card-id');
+            if (!isNaN(slideIdx)) {
+                swiper.slideTo(slideIdx);
+                // 等待滑动完成后滚动到卡片
+                setTimeout(() => {
+                    if (cardId) {
+                        const targetCard = document.getElementById(cardId);
+                        if (targetCard) {
+                            targetCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    } else {
+                        // 如果没有 id，尝试通过 .item-name 文本定位（略复杂，先忽略）
+                    }
+                }, 400);
+                closePanel(); // 搜索后关闭面板
+            }
+        });
+    });
+}
 
-    // 强制刷新按钮
-    document.getElementById('forceReloadBtn')?.addEventListener('click', () => window.location.reload(true));
+searchInput.addEventListener('input', performGlobalSearch);
 
-    // 所有外部链接新窗口打开（保留原有）
-    document.querySelectorAll('a[href^="http"]').forEach(link => link.setAttribute('target', '_blank'));
+// 当 swiper 切换时不需要重新过滤，因为已经全局了，但结果列表仍然保留，不影响
 </script>
 </body>
 </html>
