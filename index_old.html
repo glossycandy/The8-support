@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>徐明浩小分队 · 回归打榜合集</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #f0f7f0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: #1e3a2f;
+            padding: 0 0 80px 0;
+        }
+        .hero {
+            background: linear-gradient(135deg, #48c48c, #2a9d6e);
+            padding: 32px 20px;
+            text-align: center;
+            border-radius: 0 0 40px 40px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .hero h1 {
+            font-size: 28px;
+            font-weight: 800;
+            color: #fff9c4;
+            text-shadow: 2px 2px 0 #1a4d38;
+            letter-spacing: 2px;
+        }
+        .hero p {
+            font-size: 16px;
+            color: #e0f2e9;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+        .section-card {
+            background: white;
+            border-radius: 28px;
+            margin-bottom: 24px;
+            padding: 20px;
+            box-shadow: 0 6px 14px rgba(46,125,94,0.12);
+            border: 1px solid #c8e0d0;
+        }
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1e5e3f;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+            border-left: 6px solid #8fca9a;
+            padding-left: 14px;
+        }
+        .sub-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #48c48c;
+            margin: 20px 0 12px 0;
+            background: #e2f0e2;
+            display: inline-block;
+            padding: 4px 16px;
+            border-radius: 40px;
+        }
+        .item-block {
+            background: #fafff7;
+            border-radius: 20px;
+            padding: 16px;
+            margin-bottom: 16px;
+            border-left: 4px solid #8fca9a;
+        }
+        .item-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .desc {
+            font-size: 14px;
+            color: #4a6b5c;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+        .link-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 8px;
+        }
+        .link-btn {
+            background: #eef3ea;
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 14px;
+            color: #1e5e3f;
+            text-decoration: none;
+            border: 1px solid #b8d9c4;
+            transition: 0.2s;
+        }
+        .link-btn:hover {
+            background: #48c48c;
+            color: white;
+            border-color: #48c48c;
+        }
+        .float-dir-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 20px;
+            background: #48c48c;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+            cursor: pointer;
+            z-index: 1000;
+            border: 2px solid #ffdf9c;
+        }
+        .dir-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(30, 58, 47, 0.92);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.25s ease;
+        }
+        .dir-overlay.open {
+            visibility: visible;
+            opacity: 1;
+        }
+        .dir-panel {
+            background: white;
+            width: 85%;
+            max-width: 340px;
+            border-radius: 48px;
+            padding: 28px 20px;
+            max-height: 80vh;
+            overflow-y: auto;
+            text-align: center;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.3);
+            border: 2px solid #ffdf9c;
+        }
+        .dir-panel h3 {
+            font-size: 24px;
+            color: #1e5e3f;
+            margin-bottom: 20px;
+        }
+        .dir-group {
+            margin: 20px 0;
+            text-align: left;
+        }
+        .dir-group-title {
+            font-weight: 700;
+            font-size: 18px;
+            color: #48c48c;
+            border-left: 4px solid #8fca9a;
+            padding-left: 12px;
+            margin-bottom: 12px;
+        }
+        .dir-link {
+            display: block;
+            padding: 10px 0 10px 20px;
+            color: #1e3a2f;
+            text-decoration: none;
+            font-size: 15px;
+            border-bottom: 1px solid #e0f0e0;
+        }
+        .close-dir {
+            margin-top: 20px;
+            background: #b8d9c4;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #1e5e3f;
+            width: 100%;
+        }
+        .deco {
+            position: fixed;
+            bottom: 20px;
+            left: 16px;
+            font-size: 24px;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        .infinity {
+            position: fixed;
+            top: 100px;
+            right: 10px;
+            font-size: 80px;
+            opacity: 0.08;
+            pointer-events: none;
+            transform: rotate(15deg);
+        }
+        footer {
+            text-align: center;
+            font-size: 12px;
+            color: #7e9d8c;
+            margin-top: 30px;
+            padding-bottom: 20px;
+        }
+        .tip {
+            background: #fef9e7;
+            border-left: 4px solid #f59e0b;
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 13px;
+            margin: 12px 0;
+        }
+/* 左下角搜索悬浮按钮 */
+.float-search-btn {
+    position: fixed;
+    bottom: 24px;
+    left: 20px;
+    background: #48c48c;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    cursor: pointer;
+    z-index: 1000;
+    border: 2px solid #ffdf9c;
+}
+/* 搜索面板（默认隐藏） */
+.search-panel {
+    position: fixed;
+    bottom: 100px;
+    left: 20px;
+    right: 20px;
+    background: white;
+    border-radius: 32px;
+    padding: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    z-index: 1100;
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+    border: 1px solid #c8e0d0;
+    max-width: 400px;  /* 大屏幕下不会太宽 */
+}
+.search-panel.open {
+    display: flex;
+}
+.search-panel input {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 40px;
+    border: 1px solid #b8d9c4;
+    font-size: 16px;
+    outline: none;
+    background: #fefef7;
+}
+.search-panel .close-search {
+    background: #eef3ea;
+    border: none;
+    padding: 10px;
+    border-radius: 40px;
+    cursor: pointer;
+    color: #1e5e3f;
+    font-weight: 500;
+}
+.search-status {
+    font-size: 13px;
+    color: #7e9d8c;
+    padding: 0 8px;
+}
+
+/* ========== 手机自适应修复 ========== */
+.container, .section-card, .item-block, .sub-title, .tip, .link-list {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* 防止长链接或单词溢出 */
+.desc, .tip, .link-btn {
+    word-break: break-word;
+    white-space: normal;
+}
+
+/* 按钮在手机上自动换行 */
+.link-list {
+    flex-wrap: wrap;
+}
+
+/* 图片/视频等媒体元素自适应 */
+img, iframe, video {
+    max-width: 100%;
+    height: auto;
+}
+
+/* 确保搜索面板在小屏幕不超出左右边界 */
+.search-panel {
+    max-width: calc(100% - 40px);
+    left: 20px;
+    right: 20px;
+}
+
+/* 目录二级分组 */
+.dir-group {
+    margin-bottom: 12px;
+    border: 1px solid #e0f0e0;
+    border-radius: 16px;
+    padding: 0 12px;
+    background: #fefef7;
+}
+.dir-group summary {
+    cursor: pointer;
+    font-weight: bold;
+    padding: 12px 0;
+    list-style: none;
+}
+.dir-group summary::-webkit-details-marker {
+    display: none;
+}
+.dir-group summary::before {
+    content: "▶ ";
+    color: #48c48c;
+    font-size: 14px;
+}
+details[open] > summary::before {
+    content: "▼ ";
+}
+/* 三级子分组 */
+.dir-subgroup {
+    margin-left: 16px;
+    margin-top: 4px;
+    margin-bottom: 8px;
+    border-left: 2px solid #c8e0d0;
+    padding-left: 12px;
+}
+.dir-subgroup summary {
+    cursor: pointer;
+    font-weight: 500;
+    padding: 6px 0;
+    list-style: none;
+    color: #48c48c;
+}
+.dir-subgroup summary::-webkit-details-marker {
+    display: none;
+}
+.dir-subgroup summary::before {
+    content: "▶ ";
+    font-size: 12px;
+}
+.dir-subgroup[open] summary::before {
+    content: "▼ ";
+}
+/* 目录链接样式 */
+.dir-link {
+    display: block;
+    padding: 6px 0 6px 24px;
+    color: #1e3a2f;
+    text-decoration: none;
+    font-size: 14px;
+    border-bottom: none;
+}
+.dir-link:hover {
+    background: #e2f0e2;
+    border-radius: 20px;
+}
+/* ========== 强力手机自适应修复 ========== */
+* {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+body, .container, .section-card, .item-block, .sub-title, .tip, .link-list, .desc, .item-name, .dir-panel, .search-panel {
+    overflow-x: hidden !important;
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    white-space: normal !important;
+}
+
+/* 限制卡片最大宽度为屏幕宽度减边距 */
+.section-card, .item-block {
+    width: 100%;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 确保链接按钮不会溢出 */
+.link-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.link-btn {
+    white-space: normal;
+    word-break: keep-all; /* 避免中文单词被截断 */
+    flex-shrink: 0;
+}
+
+/* 图片和视频自适应 */
+img, iframe, video {
+    max-width: 100%;
+    height: auto;
+}
+
+/* 防止 tip 内的长链接溢出 */
+.tip a {
+    word-break: break-all;
+}    
+/* 强制悬浮按钮文字为白色 */
+.float-search-btn span,
+.float-dir-btn span {
+    color: white !important;
+    font-weight: bold !important;
+    font-size: 20px !important;
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+    <h1>徐明浩小分队即将回归！</h1>
+    <p><span>✨</span> 专辑音源打榜一站汇总 <span>✨</span></p>
+</div>
+
+<div class="container" id="mainContent">
+ <!-- ========= 第一部分：准备工作 ========= -->
+<div id="prep" class="section-card">
+    <div class="section-title"><span>📋</span> 第一步：准备工作</div>
+    
+    <!-- 科普了解（保留） -->
+    <div class="item-block">
+        <div class="item-name">🔍 科普了解</div>
+        <div class="desc">
+            为什么需要打榜？音源/投票是什么？回归期怎么做最有效？
+        </div>
+        <p>1. 先准备科学上网工具 (因为使用感都不一样不做具体推荐，给几个名字大家用过的：樱花猫、矿泉水、快连、快喵、yuko等，还有一些免费的xhs搜一搜)</p>
+        <p>2. 将所需软件下载好：<br>
+        国内各听歌软件<strong>QQ音乐</strong>、酷狗酷我等；<br>
+        国外音源 (<strong>Melon</strong>、Spotify) +打歌投票 (idolchamp、mubeat、mnetplus、linc/tin事前+higher实时) </p>
+        <p>3. 正式回归前先将在听歌和打歌软件攒票 (下面第二步里有下载注册攒票教程) </p>
+        <div class="link-list">
+            <a href="https://weibo.com/8008561108/5303955094505470" class="link-btn">📖 微博科普</a>
+        </div>
+    </div>  <!-- 这里正确关闭了第一个 item-block -->
+
+        <!-- 软件下载（恢复为详细安卓/苹果分类） -->
+        <div class="item-block">
+            <div class="item-name">📲 软件下载 · 安卓用户</div>
+            <div class="desc">
+                <strong>方法1：</strong>安大师 + 夸克（基本能安装所有软件）<br>
+        <div class="tip">
+                💡 在夸克下载以后压缩包后缀改为zip后打开：<a href="https://pan.quark.cn/s/d6043dce0860" target="_blank" style="color:#48c48c;">夸克分享</a>
+           </div>
+                <strong>方法2：</strong>apkpure（mnetplus需单独找安装包）<br>
+           <div class="link-list">
+                <a href="https://apkpure.net/cn/" class="link-btn">📦 apkpure点此下载</a>
+           </div>
+        </div>
+            <div class="desc">
+                <strong>方法3：</strong>百度搜索“软件名+直接下载”，注意避开捆绑软件<br>
+           </div>
+           <div class="desc">
+                <strong>部分手机通用：</strong>下载谷歌商店，在谷歌商店内下载<br>
+                <span style="color:#d9534f;">⚠️ 华为手机无谷歌服务，建议用方法1或2</span>
+            </div>
+            <div class="tip">
+                💡 小红书参考教程：<a href="http://xhslink.com/o/6AlbgyOWuUB" target="_blank" style="color:#48c48c;">小红书分享</a>
+            </div>
+        </div>
+
+        <div class="item-block">
+            <div class="item-name">🍎 软件下载 · 苹果用户</div>
+            <div class="desc">借国外Apple ID登录App Store下载（可借用可购买临时账号等）</div>
+            <div class="link-list">
+                <a href="https://weibo.com/3861028956/5103091512251376" class="link-btn">不借用id教程(仅供参考)</a>
+            </div>
+        <div class="desc">Qoo、出境易、ourplay都适用性不够，暂不推荐（Qoo可以下载部分软件、出境易可下载软件并使用、ourplay要自己下载导入提供谷歌框架）</div>
+        </div>
+    </div>
+
+    <!-- ========= 第二部分：攒票阶段 ========= -->
+    <div id="saveTickets" class="section-card">
+        <div class="section-title"><span>🎫</span> 第二步：攒票阶段</div>
+        <div class="tip" style="font-size: 16px;">
+                <strong>💡 数数官方教程汇总微博：</strong><a href="https://weibo.com/7503303629/5298184243121761" target="_blank" style="color:#48c48c;">Stay_with_徐明浩微博</a>
+            </div>
+
+        <!-- 国内软件 -->
+        <div class="sub-title">🇨🇳 国内软件</div>
+        <div class="item-block" id="domestic">
+            <div class="item-name">🐧 QQ音乐、酷狗、酷我</div>
+            <div class="desc">由你榜攒积分、可多创小号(1手机号可申5个qq号)</div>
+            <div class="link-list">
+                <a href="https://weibo.com/7503303629/5280425008170059" class="link-btn">⭐ 数数官方教程</a>
+                <a href="https://weibo.com/5643129991/5280466753291013" class="link-btn">🐸 粉丝分享教程</a>
+            </div>
+        </div>
+      
+        <!-- 国外攒票软件 -->
+        <div class="sub-title">🌍 国外软件（攒票/投票）</div>
+        <div class="desc">
+                💡 国外软件需科学上网，有谷歌邮箱可直接注册，注册不了谷歌邮箱或者谷歌不稳定的：①有Email登录入口的可以直接用QQ邮箱/outlook邮箱注册；②还可以选择kakao方式登录，kakao账号可以直接qq邮箱注册。操作非常简单没有门槛，可参考冠军秀粉丝教程第35秒（可记录各软件用什么账号密码登录，若突然掉线或下次使用可方便找回）：<br>
+            <div class="link-list">
+                <a href="https://weibo.com/7503303629/5305864065646669" class="link-btn">⭐ 数数官方教程</a>
+                <a href="https://weibo.com/7816923486/5107255140161551" class="link-btn">粉丝注册melon教程</a>
+            </div>                
+        </div>
+        <div class="item-block" id="idolchamp">
+            <div class="item-name">🏆 Idolchamp</div>
+            <div class="desc">冠军秀--⭐永久有效、❤️90天有效期、💙月底清零、使用💙可升级；广告转盘得❤️(每日10次)、签到/用💙投票/升级可额外得转盘机会；每个设备只能用一个账号签到答题，看广不限制账号</div>
+            <div class="link-list">
+                <a href="https://weibo.com/7503303629/5277140859224626" class="link-btn">⭐ 数数官方教程</a>
+                <a href="https://weibo.com/5643129991/5277566183147297" class="link-btn">🐸 粉丝分享教程</a>
+            </div>
+        <div class="tip">
+                💡 冠军秀问答答案网站 (得💙)，💙月底清零，问答有两种，1.最上面的没有答案但连续五天答对可得30❤️，2.下面十个问答只有💙可以攒10天一起答：
+               <a href="https://idolchampquiz.kpopvotes.com/" target="_blank" style="color:#48c48c;">Idolchamp问答答案</a>
+           </div>
+        </div>
+        <div class="item-block" id="mubeat">
+            <div class="item-name">📀 Mubeat</div>
+            <div class="desc">音乐中心-- Heartbeat💗有效期90天，事前vote1票=3💗不限投票次数，实时vote1票=30💗每账号可投5次 (给实时vote留150💗)，可多创号多攒票</div>
+            <div class="link-list">
+                <a href="https://weibo.com/7503303629/5281932381785509" class="link-btn">⭐ 数数官方教程</a>
+                <a href="https://weibo.com/5643129991/5282208828885150" class="link-btn">🐸 粉丝分享教程</a>
+            </div>
+        </div>
+        <div class="item-block" id="muniverse">
+            <div class="item-name">🌌 Muniverse</div>
+            <div class="desc">音乐中心--签到得灰心30天有效可投最佳舞台；看广得蓝心60天有效可投事前和实时；充zhi得黄心永久可投实时</div>
+            <div class="link-list">
+                <a href="https://weibo.com/7503303629/5305866324807381" class="link-btn">⭐ 数数官方教程</a>
+                <a href="#" class="link-btn">🐸 粉丝分享教程(待更新)</a>
+            </div>
+        </div>
+        <div class="item-block" id="higher">
+            <div class="item-name">⭐ Linc/tin(事前) | Higher(实时)</div>
+            <div class="desc">人气歌谣--Higher实时投票：Ruby♦️有效期90天，<strong>每号限投5票攒够250ruby换号继续攒250</strong><br>
+Linc/tin事前投票：P💖有效期180天，每号一天限投10票一共5天，<strong>每号攒够1500换号攒</strong></div>
+            <div class="link-list">
+                <a href="https://weibo.com/7503303629/5279410408131136" class="link-btn">⭐ 数数官方教程</a>
+                <a href="https://weibo.com/5643129991/5280071402914935" class="link-btn">🐸 粉丝教程-事前</a>
+                <a href="https://weibo.com/5643129991/5279704917475805" class="link-btn">🐸 粉丝教程-实时</a>
+            </div>
+        </div>
+        <div class="item-block" id="mnetplus">
+            <div class="item-name">🔴 Mnet Plus</div>
+            <div class="desc">MCD--无需攒票，分事前和实时投票，每个账号均限投5票，安卓需每天开分身切号投票（悟空分身app；需准备多个能收到验证码的邮箱qq、163、sina、outlook等）</div>
+            <div class="link-list">
+                <a href="https://weibo.com/7503303629/5304670084145963" class="link-btn">⭐ 数数官方教程</a>
+                <a href="#" class="link-btn">🐸 粉丝分享教程(待更新)</a>
+            </div>
+        </div>
+        <div class="item-block" id="fancast">
+            <div class="item-name">🟦 Fancast</div>
+            <div class="desc">音乐银行--💙有效期30天💛永久，可无限投票多创多攒，单次投票最多500票，间隔10min投下次</div>
+            <div class="link-list">
+                <a href="https://weibo.com/7503303629/5305118410674508" class="link-btn">⭐ 数数官方教程</a>
+                <a href="#" class="link-btn">🐸 粉丝分享教程(待更新)</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========= 第三部分：回归阶段 ========= -->
+    <div id="comeback" class="section-card">
+        <div class="section-title"><span>🚀</span> 第三步：回归阶段</div>
+        
+   <div class="tip">
+                💡 回归期三步：专辑购买、音源播放、打歌投票；具体安排事项到时数数会出时间安排表，先熟悉操作，跟着走就行<br>
+                <a href="#" style="color:#48c48c;"></a>
+            </div>
+
+        <!-- 国内音源 -->
+        <div class="sub-title">🇨🇳 国内音源</div>
+        <div class="item-block" id="domestic-cb">
+            <div class="item-name">QQ音乐 · 酷狗 · 酷我</div>
+            <div class="desc">回归期重点：专辑购买、音源播放、榜单推荐（可以重点先学习QQ音乐的新歌必做、由你榜积分、三清教程）</div>
+            <div class="link-list">
+                <a href="https://weibo.com/7503303629/5060563742754752" class="link-btn">⭐ 数数官方教程</a>
+                <a href="#" class="link-btn">🐸 粉丝分享教程</a>
+            </div>
+            <div class="link-list">
+                <a href="https://weibo.com/7503303629/5060491161896099" class="link-btn">1.新歌必做</a>
+             </div>
+             <div class="link-list">
+                <a href="https://weibo.com/7503303629/5060384421579068" class="link-btn">2.由你榜积分</a>
+             </div>
+             <div class="link-list">
+                <a href="https://weibo.com/7503303629/5060512454808731" class="link-btn">3.播放三清</a>
+            </div>
+        </div>
+
+        <!-- 国外音源 + 打歌投票 -->
+        <div class="sub-title">🌍 国外音源 & 打歌投票</div>
+        <div class="item-block" id="melon">
+            <div class="item-name">🍈 Melon</div>
+            <div class="desc">📌下载、套餐购买、登入登出、基础设置、缓存、歌单等
+                <p>1.下载安装
+                <p>2.完成基础设置(无需注册，数数组织套餐购买后再登录)
+                <p>3.熟悉操作(登录、搜索点赞、歌单、缓存...)
+            </div>
+            <div class="link-list">
+                <a href="https://weibo.com/7859023491/5098393749160272" class="link-btn">⭐ 狂想图文教程</a>
+                <a href="https://weibo.com/7503303629/5106122256025873" class="link-btn">⭐ 数数录屏教程</a>
+            </div>
+            <div class="link-list">
+                <a href="https://pan.baidu.com/s/1xmMC_hmRVw32NBzWhTCEsQ?pwd=8888" class="link-btn">安卓melon安装包</a>
+                <a href="https://weibo.com/3861028956/5103091512251376" class="link-btn">苹果melon下载(参考)</a>
+            </div>
+            <div class="link-list">
+                <a href="https://weibo.com/7742872929/5105346153021864" class="link-btn">粉丝录屏教程1(下载、登录、基础设置、歌单、激活、歌曲下载删除)</a>
+                <a href="https://weibo.com/6839202774/5102998202613977" class="link-btn">粉丝录屏教程2(登录、点赞、基础设置、歌单)</a>
+           </div>
+           <div class="desc">套餐购买后：回归期
+                <p>4.回归前一两天激活套餐
+                <p>5.回归首小时内下载删除歌曲
+                <p>6.每天切瓜：晚11点清缓存+建歌单
+           </div>
+           <div class="link-list">
+                <a href="https://weibo.com/7503303629/5106116302471530" class="link-btn">安卓余额下载</a>
+                <a href="https://weibo.com/7503303629/5106117176723994" class="link-btn">ios礼物盒下载</a>
+           </div>
+           <div class="link-list">
+                <a href="https://weibo.com/7503303629/5106856662140645" class="link-btn">windows激活下载</a>
+           </div>
+           <div class="link-list">
+                <a href="https://weibo.com/7798536579/5106915359329483" class="link-btn">每晚11点清除歌单和缓存</a>
+           </div>
+           <div class="link-list">
+                <a href="https://weibo.com/6839202774/5106549511423568" class="link-btn">melon定时和防断</a>
+                <a href="https://weibo.com/7710312293/5106915579265996" class="link-btn">melon切瓜次数</a>
+           </div>
+        </div>
+        <div class="item-block" id="spotify">
+            <div class="item-name">🟢 Spotify</div>
+            <div class="desc">全球音乐流媒体平台、歌单循环</div>
+            <div class="link-list">
+                <a href="https://weibo.com/7859023491/5098756091937201" class="link-btn">⭐ 狂想图文教程</a>
+                <a href="#" class="link-btn">🐸 粉丝分享教程(暂无)</a>
+            </div>
+        </div>
+        <div class="item-block" id="youtube">
+            <div class="item-name">▶️ Youtube</div>
+            <div class="desc">视频播放软件、刷管</div>
+            <div class="link-list">
+                <a href="https://weibo.com/7859023491/5099118586495932" class="link-btn">⭐ 狂想图文教程</a>
+                <a href="#" class="link-btn">🐸 粉丝分享教程(暂无)</a>
+            </div>
+        </div>
+        <div class="item-block" id="vote">
+            <div class="item-name">🗳️ 打歌投票</div>
+            <div class="desc">回归周投票会出日程表，先攒票后及时跟着数据站投票</div>
+            <div class="link-list">
+                <a href="#" class="link-btn">本周投票总指南(待更新)</a>
+                <a href="#" class="link-btn">紧急投票链接(待更新)</a>
+            </div>
+        </div>
+    </div>
+
+<!-- ========= 新增：专辑购买指导 ========= -->
+<div id="album" class="section-card">
+    <div class="section-title"><span>💿</span> 专辑购买指导</div>
+    
+    <!-- 专辑知识科普 -->
+    <div class="item-block">
+        <div class="item-name">📖 专辑知识科普</div>
+        <div class="desc">
+            <p>📌 什么是初动？什么是Hanteo/Gaon榜？为什么买专辑对一位有帮助？</p>
+            <p>✨ 通常专辑会有预售、一批、二批，预售和一批销量最重要，直接影响打歌节目销量分和一位候补资格。</p>
+            <p>💡 不同版本（PB版、KIT版、C版/韭菜盘、WVS版/电子专等）计入榜单规则相同，请优先选择粉丝吧代购链接确保计入销量榜。</p>
+        </div>
+        <div class="link-list">
+            <a href="https://weibo.com/7742872929/5276735106978282" class="link-btn" target="_blank">专辑购买科普</a>
+        </div>
+    </div>
+    
+    <!-- 购买渠道 -->
+    <div class="item-block">
+        <div class="item-name">🛒 购买渠道</div>
+        <div class="desc">
+            <p>🔹 以下为粉丝大吧组织的代购链接，销量将全部计入，助力一位！</p>
+            <p>🔹 请选择正规代购，避免计入不计销量的渠道。</p>
+        </div>
+        <div class="link-list">
+            <a href="#" class="link-btn" target="_blank">🌟 浩吧代购链接1（待更新）</a>
+        </div>
+        <div class="link-list">
+            <a href="#" class="link-btn" target="_blank">🌟 暖光代购链接2（待更新）</a>
+        </div>
+        <div class="tip" style="margin-top: 12px;">
+            💡 回归日程出来后，通常会开启多批代购。建议关注粉丝大吧置顶微博，及时下单。
+        </div>
+    </div>
+</div>
+
+    <!-- ========= 第四部分：答疑和反馈 ========= -->
+    <!-- 答疑 & 反馈 板块（替换原 #faq 内容） -->
+<div id="faq" class="section-card">
+    <div class="section-title"><span>❓</span> 答疑 & 粉丝群</div>
+    
+    <!-- 微信群答疑入口 -->
+    <div class="item-block">
+        <div class="item-name">💬 微信粉丝群 · 实时答疑</div>
+        <div class="desc">
+            扫码加入打榜互助群，<strong>无需登录</strong>即可提问，群内粉丝一起解答。<br>
+            ⚠️ 如二维码失效，请私信微博 @ 获取最新入口。
+        </div>
+        <!-- 二维码占位：请替换为真实的微信群二维码图片链接 -->
+        <div style="text-align: center; margin: 16px 0;">
+            <img src="此处替换为微信群二维码图片链接" alt="微信群二维码" style="width: 200px; border-radius: 16px; border: 1px solid #c8e0d0;">
+            <p style="font-size: 12px; color: #7e9d8c; margin-top: 8px;">微信扫一扫，加入打榜互助群</p>
+        </div>
+        <div class="link-list">
+            <a href="#" class="link-btn">📢 反馈失效二维码</a>
+        </div>
+    </div>
+
+    <!-- 粉丝妙招墙（游客分享） -->
+    <div class="item-block" id="tips">
+        <div class="item-name">💡 粉丝小妙招</div>
+        <div class="desc">
+            这里收集了大家分享的打榜小技巧、隐藏攻略。点击标题展开查看详情。<br>
+            🌟 如果你也有妙招，请通过<a href="https://docs.qq.com/sheet/DRnBmQm12S0l4TWxv">此链接</a>提交（免登录），我们会定期精选更新。
+        </div>
+        
+        <!-- 示例发现1 -->
+        <details style="background: #f9f9f9; border-radius: 12px; padding: 12px; margin: 12px 0; border: 1px solid #e0f0e0;">
+            <summary style="font-weight: 600; cursor: pointer; color: #48c48c;">✨ 发现：(举例)melon夜间可以通过手机的快捷指令操作防断</summary>
+            <p style="margin-top: 8px; color: #4a6b5c;"> 具体说明如下巴拉巴拉。</p>
+        </details>
+                      
+        <div class="link-list">
+             <a href="https://docs.qq.com/sheet/DRnBmQm12S0l4TWxv" class="link-btn">🔍 查看更多历史妙招</a>
+        </div>
+    </div>
+</div>
+
+<div style="text-align: center; margin: 20px;">
+    <button id="forceReloadBtn" style="background: #48c48c; color: white; border: none; padding: 10px 20px; border-radius: 40px; font-size: 14px;">🔄 如果内容不是最新的，点我强制刷新</button>
+</div>
+<script>
+    document.getElementById('forceReloadBtn').addEventListener('click', function() {
+        window.location.reload(true);  // true 代表强制从服务器重新加载，跳过缓存
+    });
+</script>
+
+<!-- 悬浮按钮 -->
+<!-- 左下角搜索悬浮按钮 -->
+<div class="float-search-btn" id="floatSearchBtn">
+    <span>搜索</span>
+</div>
+<!-- 搜索面板 -->
+<div class="search-panel" id="searchPanel">
+    <input type="text" id="searchInput" placeholder="输入关键词 例如：Melon 下载">
+    <div class="search-status" id="searchStatus">✨ 输入关键词后自动过滤教程卡片</div>
+    <button class="close-search" id="closeSearchBtn">关闭</button>
+</div>
+<div class="float-dir-btn" id="floatDirBtn">
+    <span>目录</span>
+</div>
+
+<!-- 右下角全屏目录浮层 -->
+<div class="dir-overlay" id="dirOverlay">
+    <div class="dir-panel">
+    <h3>📚 快速跳转 <span>🐸✨</span></h3>
+    
+    <!-- 二级：准备工作 -->
+    <details class="dir-group">
+        <summary class="dir-group-title">📋 准备工作</summary>
+        <a href="#prep" class="dir-link">🔍 科普了解 / 软件下载</a>
+    </details>
+    
+    <!-- 二级：攒票阶段 -->
+    <details class="dir-group">
+        <summary class="dir-group-title">🎫 攒票阶段</summary>
+        <!-- 三级：国内软件 -->
+        <details class="dir-subgroup">
+            <summary class="dir-subgroup-title">🇨🇳 国内软件</summary>
+            <a href="#domestic" class="dir-link">🐧 QQ音乐/酷狗/酷我</a>
+        </details>
+        <!-- 三级：国外软件 -->
+        <details class="dir-subgroup">
+            <summary class="dir-subgroup-title">🌍 国外软件（攒票/投票）</summary>
+            <a href="#idolchamp" class="dir-link">🏆 Idolchamp</a>
+            <a href="#mubeat" class="dir-link">📀 Mubeat</a>
+            <a href="#muniverse" class="dir-link">🌌 Muniverse</a>
+            <a href="#higher" class="dir-link">⭐ Higher / Link</a>
+            <a href="#mnetplus" class="dir-link">🔴 Mnet Plus</a>
+            <a href="#fancast" class="dir-link">🟦 Fancast</a>
+        </details>
+    </details>
+    
+    <!-- 二级：回归阶段 -->
+    <details class="dir-group">
+        <summary class="dir-group-title">🚀 回归阶段</summary>
+        <!-- 三级：国内音源 -->
+        <details class="dir-subgroup">
+            <summary class="dir-subgroup-title">🇨🇳 国内音源</summary>
+            <a href="#domestic-cb" class="dir-link">QQ音乐/酷狗/酷我</a>
+        </details>
+        <!-- 三级：国外音源 & 投票 -->
+        <details class="dir-subgroup">
+            <summary class="dir-subgroup-title">🌍 国外音源 & 打歌投票</summary>
+            <a href="#melon" class="dir-link">🍈 Melon</a>
+            <a href="#spotify" class="dir-link">🟢 Spotify</a>
+            <a href="#youtube" class="dir-link">▶️ Youtube</a>
+            <a href="#vote" class="dir-link">🗳️ 打歌投票合集</a>
+        </details>
+    </details>
+
+    <!-- 新增：专辑购买指导 -->
+    <details class="dir-group">
+        <summary class="dir-group-title">💿 专辑购买指导</summary>
+        <a href="#album" class="dir-link">📖 专辑知识科普 / 购买渠道</a>
+    </details>
+    
+    <!-- 二级：答疑 & 粉丝群 -->
+    <details class="dir-group">
+        <summary class="dir-group-title">❓ 答疑 & 粉丝群</summary>
+        <a href="#faq" class="dir-link">💬 微信粉丝群</a>
+        <a href="#tips" class="dir-link">💡 粉丝发现墙</a>
+    </details>
+    
+    <button class="close-dir" id="closeDirBtn">关闭</button>
+</div>
+</div>
+
+<div class="deco"> 🐸  THE8  🐸 </div>
+<div class="infinity">∞</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // 获取元素
+        const searchBtn = document.querySelector('.float-search-btn');
+        const searchPanel = document.getElementById('searchPanel');
+        const searchInput = document.getElementById('searchInput');
+        const searchStatus = document.getElementById('searchStatus');
+        const closeSearchBtn = document.getElementById('closeSearchBtn');
+        const allItems = document.querySelectorAll('.item-block');
+
+        // 如果找不到必要元素，退出
+        if (!searchBtn || !searchPanel || !searchInput) {
+            console.error('搜索元素未找到');
+            return;
+        }
+
+        // 打开面板
+        function openPanel() {
+            searchPanel.classList.add('open');
+            searchInput.focus();
+        }
+        // 关闭面板并清空搜索
+        function closePanel() {
+            searchPanel.classList.remove('open');
+            searchInput.value = '';
+            filterItems(); // 重置所有卡片显示
+        }
+        // 过滤卡片（支持空格分隔的多关键词 AND 匹配）
+        function filterItems() {
+            const raw = searchInput.value.trim();
+            if (raw === '') {
+                allItems.forEach(item => item.style.display = '');
+                if (searchStatus) searchStatus.innerText = '✨ 显示全部教程卡片';
+                return;
+            }
+            const keywords = raw.split(/\s+/).filter(k => k.length > 0);
+            let matchCount = 0;
+            allItems.forEach(item => {
+                const text = item.innerText.toLowerCase();
+                const allMatch = keywords.every(kw => text.includes(kw.toLowerCase()));
+                if (allMatch) {
+                    item.style.display = '';
+                    matchCount++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            if (searchStatus) {
+                searchStatus.innerText = `🔍 找到 ${matchCount} 个匹配的卡片（关键词：${keywords.join(' + ')}）`;
+            }
+        }
+
+        // 按钮点击：切换面板（阻止冒泡）
+        searchBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (searchPanel.classList.contains('open')) {
+                closePanel();
+            } else {
+                openPanel();
+            }
+        });
+
+        // 关闭按钮
+        if (closeSearchBtn) {
+            closeSearchBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                closePanel();
+            });
+        }
+
+        // 输入时实时过滤
+        searchInput.addEventListener('input', filterItems);
+
+        // 点击页面其他地方关闭面板（但不关闭按钮本身触发的冒泡已阻止）
+        document.addEventListener('click', function(e) {
+            if (searchPanel.classList.contains('open')) {
+                // 如果点击的目标不是面板内部且不是搜索按钮，则关闭
+                if (!searchPanel.contains(e.target) && e.target !== searchBtn) {
+                    closePanel();
+                }
+            }
+        });
+    });
+    // ========== 右下角目录悬浮按钮控制 ==========
+    const floatDirBtn = document.getElementById('floatDirBtn');
+    const dirOverlay = document.getElementById('dirOverlay');
+    const closeDirBtn = document.getElementById('closeDirBtn');
+
+    if (floatDirBtn && dirOverlay) {
+        // 打开目录浮层
+        floatDirBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            dirOverlay.classList.add('open');
+        });
+        // 关闭目录浮层（按钮和背景点击）
+        function closeDirOverlay() {
+            dirOverlay.classList.remove('open');
+        }
+        if (closeDirBtn) {
+            closeDirBtn.addEventListener('click', closeDirOverlay);
+        }
+        dirOverlay.addEventListener('click', function(e) {
+            if (e.target === dirOverlay) {
+                closeDirOverlay();
+            }
+        });
+    }
+
+    // 目录链接点击后平滑滚动并关闭浮层
+    const dirLinks = document.querySelectorAll('.dir-link');
+    dirLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                closeDirOverlay(); // 关闭浮层
+                const yOffset = -80; // 调整滚动偏移，防止被顶部遮挡
+                const y = targetElement.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                window.scrollTo({ top: y, behavior: 'smooth' });
+            }
+        });
+    });
+// 让所有外部链接在新标签页打开，避免返回时页面刷新回到顶部
+document.querySelectorAll('a[href^="http"]').forEach(link => {
+    link.setAttribute('target', '_blank');
+});
+</script>
+</body>
+</html>
