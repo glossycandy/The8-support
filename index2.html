@@ -25,11 +25,16 @@
             width: 100%;
             height: 100vh;
         }
-        .swiper-slide {
-            overflow-y: auto;   /* 每个板块内部可滚动 */
-            padding: 20px 16px 40px;
-            background: #f0f7f0;
-        }
+       .swiper-slide {
+    overflow-y: auto;   /* 允许垂直滚动 */
+    overflow-x: hidden; /* 避免水平滚动条 */
+    height: 100vh;      /* 固定高度，内部滚动区域独立 */
+    -webkit-overflow-scrolling: touch; /* 流畅滚动 */
+}
+/* 分页圆点位置（左右滑动时显示在底部中央） */
+.swiper-pagination {
+    bottom: 10px !important;
+}
         /* 保留原有卡片样式 */
         .section-card {
             background: white;
@@ -614,21 +619,27 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
     // 初始化 Swiper
-    const swiper = new Swiper('.swiper', {
-    direction: 'vertical',
+    // 初始化 Swiper（左右滑动版）
+const swiper = new Swiper('.swiper', {
+    direction: 'horizontal',
     pagination: { el: '.swiper-pagination', clickable: true },
     mousewheel: {
-        sensitivity: 1,        // 灵敏度，1 为默认
-        releaseOnEdges: true,   // 到达边缘后不再阻止页面滚动
-        thresholdDelta: 30,     // 滚动阀值，避免微小滚动触发
-        thresholdTime: 500,     // 两次滚动之间最小时间间隔（毫秒）
+        sensitivity: 1,
+        releaseOnEdges: true,
+        thresholdDelta: 30,
+        thresholdTime: 500,
+        forceToAxis: false,
     },
     keyboard: true,
     height: window.innerHeight,
-    speed: 400,                // 切换动画速度（毫秒），使滑动更跟手
-    simulateTouch: true,       // 允许鼠标拖拽（电脑上也可用鼠标拖动）
+    speed: 400,
+    simulateTouch: true,
     touchRatio: 1,
+    threshold: 10,
+    touchAngle: 30,          // 倾斜角度大于30度时不触发翻页
 });
+
+// 其余代码（目录点击、搜索等）保持不变...
 
     // 首页目录点击跳转
     document.querySelectorAll('.dir-home-item').forEach(item => {
