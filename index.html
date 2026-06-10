@@ -344,6 +344,45 @@
 .search-result-item:active {
     background: #e2f0e2;
 }
+
+/* 倒计时模块样式 */
+.countdown-module {
+    background: linear-gradient(135deg, #ffffff, #f0faf4);
+    border-radius: 28px;
+    padding: 16px 20px;
+    margin: 20px 16px 10px 16px;
+    box-shadow: 0 6px 14px rgba(46,125,94,0.12);
+    border: 1px solid #dcfce8;
+}
+.current-date {
+    font-size: 16px;
+    color: #2a9d6e;
+    font-weight: 500;
+    margin-bottom: 8px;
+    text-align: center;
+}
+.countdown-timer {
+    font-size: 24px;
+    font-weight: 800;
+    color: #48c48c;
+    text-align: center;
+    margin-bottom: 12px;
+}
+.todo-list {
+    background: #eef3ea;
+    border-radius: 20px;
+    padding: 12px;
+    font-size: 14px;
+    color: #1e5e3f;
+}
+.todo-list p {
+    margin: 6px 0;
+    line-height: 1.4;
+}
+.todo-list .title {
+    font-weight: bold;
+    margin-bottom: 6px;
+}
 </style>
 </head>
 <body>
@@ -356,6 +395,18 @@
                 <h1 style="color: #2a9d6e; font-size: 28px;">🐸 徐明浩小分队<br>回归打榜合集</h1>
                 <p style="margin: 8px 0 20px;">左右滑动/点击圆点切换板块 · 搜索/目录快速跳转</p>
             </div>
+<!-- 回归倒计时 + 待办事项模块 -->
+<div class="countdown-module">
+    <div class="current-date" id="currentDate"></div>
+    <div class="countdown-timer" id="countdownTimer"></div>
+    <div class="todo-list">
+    <div class="title">📌 目前事项：</div>
+    <p>🔥 所有软件完成下载注册</p>
+    <p>📱 国内<strong>Q音</strong>酷狗酷我攒由你榜积分、国外打歌软件攒心攒票</p>
+    <p>📀 多多支持和宣传小分队助力专辑销量</p>
+    <p>🎯 其他事前：Spotify预保存、小投票</p>
+    </div>
+</div>
             <div class="dir-home">
                 <div class="dir-home-item" data-slide="1">
                     <h3>📋 第一步：准备工作</h3>
@@ -528,7 +579,11 @@
                 <div class="item-block" id="spotify">
                     <div class="item-name">🟢 Spotify</div>
                     <div class="desc">全球音乐流媒体平台、歌单循环</div>
-                    <div class="link-list"><a href="https://weibo.com/7859023491/5098756091937201" class="link-btn">⭐ 狂想图文教程</a><a href="#" class="link-btn">🐸 粉丝分享教程(暂无)</a></div>
+                    <div class="link-list">
+<a href="https://weibo.com/7503303629/5308202158917344" class="link-btn"> ✅spotify预保存(重要-需做)</a></div>
+                   <div class="link-list">
+<a href="https://weibo.com/7859023491/5098756091937201" class="link-btn">⭐ 狂想图文教程</a>
+<a href="#" class="link-btn">🐸 粉丝分享教程(暂无)</a></div>
                 </div>
                 <div class="item-block" id="youtube">
                     <div class="item-name">▶️ Youtube</div>
@@ -563,6 +618,8 @@
 <p>单本特典一般发随机，部分特典可指定成员 (目前有EL特典、oliveyoung特典、kream特典可指定成员)，还有部分特典买一套可凑套特典 (若3张则包含8+12+双人)</p>
 <p>3.拼车是部分特典买一套相关版本专辑会将附带的特典进行凑套，和需要其他成员的粉丝拼车就可以获得自己想要的特典，注意看清平台相关说明确保凑套</p>
 <p>4.拼邮是由于国外商品国际邮一般是25(1本)+6(2本)+6(3本)+6+6的模式，于是同一种专辑在购买平台一次下单多本可分摊每本的国际邮费，注意最后到手价为商品价+分摊国际邮+国内邮(非车主)，拼车拼邮涉及money均需小心谨慎</p>
+<p>5.比喻版：</p>
+<p>各种专辑版—商品本体；各种特典(el、sw特典...)—不同超市为吸引销量出的低价换购小商品；各种代购平台(艾肯偶店熊宝...)—帮你去超市买商品回来；大吧(浩吧暖光散盟)—帮你跟代购平台砍价的好朋友
                     </div>
                     <div class="link-list"><a href="https://weibo.com/7742872929/5276735106978282" class="link-btn" target="_blank">专辑购买科普</a></div>
                     <div class="link-list"><a href="https://weibo.com/6315500311/5307317819020746" class="link-btn" target="_blank">专辑版本</a></div>
@@ -675,6 +732,32 @@ const swiper = new Swiper('.swiper', {
 });
 
 // 其余代码（目录点击、搜索等）保持不变...
+
+// ========== 回归倒计时 & 待办事项 ==========
+// 请设置回归的目标日期（年,月,日）
+const comebackDate = new Date(2026, 5, 29);  // 2026年6月29日（月份从0开始，5代表6月）
+
+function updateCountdown() {
+    const now = new Date();
+    const currentYear = now.getFullYear();
+    const currentMonth = now.getMonth() + 1;
+    const currentDay = now.getDate();
+    document.getElementById('currentDate').innerText = `📅 今日日期：${currentYear}年${currentMonth}月${currentDay}日`;
+
+    // 计算时间差（毫秒）
+    const timeDiff = comebackDate - now;
+    if (timeDiff <= 0) {
+        document.getElementById('countdownTimer').innerHTML = '🎉 回归已开始！🎉';
+        // 注意：不再修改 todoList 内容，让它保持 HTML 中静态的文字
+        return;
+    }
+    const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+    document.getElementById('countdownTimer').innerHTML = `⏳ 距离回归还有 ${daysLeft} 天 ⏳`;
+}
+
+// 更新倒计时并设置每日自动刷新（每隔一小时刷新一次日期和倒计时）
+updateCountdown();
+setInterval(updateCountdown, 60 * 60 * 1000);
 
     // 首页目录点击跳转
     document.querySelectorAll('.dir-home-item').forEach(item => {
